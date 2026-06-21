@@ -8,17 +8,18 @@
     /* 页面主题变量 */
     :root {
       color-scheme: dark;
-      --bg: #040814;
-      --bg-soft: #081125;
-      --surface: rgba(10, 18, 38, 0.76);
-      --surface-strong: rgba(8, 15, 32, 0.92);
-      --text: #eef4ff;
-      --muted: #96a8cb;
-      --line: rgba(105, 146, 255, 0.22);
+      --bg: #050814;
+      --bg-soft: #0a1226;
+      --surface: rgba(10, 18, 36, 0.76);
+      --surface-strong: rgba(8, 14, 28, 0.92);
+      --text: #eef3ff;
+      --muted: #95a7ca;
+      --line: rgba(98, 133, 255, 0.2);
       --accent: #4b7cff;
-      --accent-soft: rgba(75, 124, 255, 0.12);
+      --accent-soft: rgba(75, 124, 255, 0.14);
       --radius: 24px;
-      --shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+      --max: 1240px;
     }
 
     * {
@@ -36,8 +37,8 @@
       font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 10% 10%, rgba(75, 124, 255, 0.22), transparent 25%),
-        radial-gradient(circle at 88% 18%, rgba(75, 124, 255, 0.14), transparent 18%),
+        radial-gradient(circle at 8% 10%, rgba(75, 124, 255, 0.2), transparent 24%),
+        radial-gradient(circle at 92% 20%, rgba(75, 124, 255, 0.16), transparent 18%),
         linear-gradient(180deg, #040814 0%, #050c1d 36%, #030711 100%);
     }
 
@@ -68,23 +69,22 @@
     .shell {
       position: relative;
       z-index: 1;
-      width: min(1280px, calc(100% - 28px));
-      margin: 0 auto;
-      padding: 18px 0 48px;
+      width: 100%;
     }
 
     .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       min-height: 72px;
-      padding: 16px 20px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+      padding: 16px max(18px, calc((100vw - var(--max)) / 2));
+      border-bottom: 1px solid var(--line);
       background: rgba(4, 8, 20, 0.72);
       backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
     }
 
     .brand {
@@ -169,30 +169,25 @@
     .hero {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
-      gap: 18px;
-      margin-top: 18px;
+      grid-template-columns: minmax(0, 0.9fr) minmax(340px, 0.82fr);
+      gap: 0;
+      min-height: calc(100dvh - 72px);
       align-items: stretch;
-    }
-
-    .hero-copy,
-    .hero-visual,
-    .marquee,
-    .panel,
-    .service-showcase,
-    .contact-card {
-      position: relative;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow);
       overflow: hidden;
     }
 
     .hero-copy {
-      min-height: 620px;
-      padding: 34px 34px 42px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 48px max(18px, calc((100vw - var(--max)) / 2)) 56px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(75, 124, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(7, 14, 30, 0.92), rgba(4, 8, 20, 0.98));
+    }
+
+    .hero-copy-inner {
+      max-width: 640px;
     }
 
     .eyebrow {
@@ -224,9 +219,9 @@
 
     .outline-word {
       position: absolute;
-      top: -58px;
-      left: 18%;
-      font-size: clamp(92px, 18vw, 228px);
+      top: -44px;
+      left: 8%;
+      font-size: clamp(92px, 16vw, 188px);
       font-weight: 900;
       letter-spacing: 0.04em;
       color: transparent;
@@ -239,10 +234,10 @@
     h1 {
       position: relative;
       z-index: 1;
-      max-width: 8.5em;
+      max-width: 7.6em;
       margin: 0;
-      font-size: clamp(44px, 7vw, 92px);
-      line-height: 0.96;
+      font-size: clamp(44px, 6vw, 84px);
+      line-height: 0.98;
       letter-spacing: -0.05em;
       text-transform: uppercase;
     }
@@ -259,11 +254,11 @@
     .hero-desc {
       position: relative;
       z-index: 1;
-      max-width: 29em;
+      max-width: 31em;
       margin: 26px 0 0;
       color: var(--muted);
-      font-size: 17px;
-      line-height: 1.9;
+      font-size: 18px;
+      line-height: 1.85;
     }
 
     .hero-actions {
@@ -277,7 +272,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
-      margin-top: 34px;
+      margin-top: 30px;
     }
 
     .tag-item {
@@ -301,24 +296,22 @@
     }
 
     .hero-visual {
-      min-height: 620px;
-      padding: 18px;
-      background: linear-gradient(180deg, rgba(11, 21, 46, 0.94), rgba(8, 14, 28, 0.96));
+      position: relative;
+      min-height: 100%;
+      background: linear-gradient(180deg, rgba(11, 21, 46, 0.94), rgba(8, 14, 28, 0.98));
     }
 
     .visual-frame {
       position: relative;
       height: 100%;
-      border-radius: calc(var(--radius) - 6px);
       overflow: hidden;
-      border: 1px solid rgba(133, 165, 255, 0.16);
       background: #020511;
     }
 
     .visual-frame img {
       height: 100%;
       object-fit: cover;
-      transform: scale(1.04);
+      transform: scale(1.02);
       animation: drift 12s ease-in-out infinite;
     }
 
@@ -336,8 +329,8 @@
     .visual-frame::before {
       width: 210px;
       height: 54px;
-      top: 18px;
-      right: 18px;
+      top: 26px;
+      right: 26px;
       transform: rotate(-9deg);
     }
 
@@ -376,8 +369,8 @@
 
     .visual-note {
       position: absolute;
-      left: 24px;
-      bottom: 24px;
+      left: 32px;
+      bottom: 32px;
       z-index: 3;
       max-width: 240px;
       padding: 16px;
@@ -403,8 +396,9 @@
     }
 
     .marquee {
-      margin-top: 18px;
-      padding: 12px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
       background: rgba(7, 14, 30, 0.86);
     }
 
@@ -425,15 +419,26 @@
       opacity: 0.96;
     }
 
+    .section-shell {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
     .content-grid {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
       gap: 18px;
-      margin-top: 18px;
+      padding: 30px 0 0;
     }
 
     .panel {
+      position: relative;
       padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
       min-height: 100%;
     }
 
@@ -485,10 +490,17 @@
     }
 
     .service-showcase {
+      position: relative;
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 0;
       min-height: 520px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
     .showcase-image {
@@ -560,14 +572,20 @@
       display: grid;
       grid-template-columns: 0.78fr 1.22fr;
       gap: 18px;
-      margin-top: 18px;
+      padding: 18px 0 0;
     }
 
     .contact-card {
+      position: relative;
       padding: 28px;
       display: grid;
       gap: 18px;
       align-content: start;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
     }
 
     .contact-card ul {
@@ -625,11 +643,12 @@
     }
 
     .footer {
+      width: min(var(--max), calc(100% - 36px));
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      margin-top: 18px;
+      margin: 18px auto 0;
       padding: 22px 24px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -682,10 +701,19 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-copy,
       .hero-visual,
       .showcase-image {
         min-height: auto;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-copy {
+        min-height: auto;
+        padding-top: 42px;
+        padding-bottom: 42px;
       }
 
       .showcase-image {
@@ -694,14 +722,15 @@
     }
 
     @media (max-width: 720px) {
-      .shell {
-        width: min(100% - 16px, 1280px);
-      }
-
       .topbar,
       .footer {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .topbar {
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
       .hero-copy,
@@ -709,6 +738,11 @@
       .showcase-copy,
       .contact-card {
         padding: 22px 18px;
+      }
+
+      .hero-copy {
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
       .tag-field,
@@ -726,8 +760,13 @@
 
       .outline-word {
         left: 0;
-        top: -22px;
+        top: -16px;
         font-size: 98px;
+      }
+
+      .section-shell,
+      .footer {
+        width: calc(100% - 16px);
       }
     }
   </style>
@@ -751,38 +790,40 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow">静态网页 · 宣传页 · 展示页 · 活动页</div>
-        <div class="headline-wrap">
-          <div class="outline-word">SHIP</div>
-          <h1>
-            <span>MAKE</span>
-            <span class="ghost">YOUR PAGE</span>
-            <span>GO LIVE</span>
-          </h1>
-        </div>
-        <p class="hero-desc">
-          我们可以帮你把静态网页整理、包装、发布到线上，让原本只躺在文件夹里的页面，变成可以直接发给客户、团队和合作方的正式入口。
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
-          <a class="button button-secondary" href="#capability">查看服务</a>
-        </div>
-        <div class="tag-field">
-          <div class="tag-item">
-            <strong>适合快上线</strong>
-            <span>有页面、有想法、要尽快拿出一个能访问的链接，就很适合直接推进。</span>
+        <div class="hero-copy-inner">
+          <div class="eyebrow">静态网页 · 宣传页 · 展示页 · 活动页</div>
+          <div class="headline-wrap">
+            <div class="outline-word">SHIP</div>
+            <h1>
+              <span>MAKE</span>
+              <span class="ghost">YOUR PAGE</span>
+              <span>GO LIVE</span>
+            </h1>
           </div>
-          <div class="tag-item">
-            <strong>适合做宣传</strong>
-            <span>企业介绍、产品页、作品集、活动页、招募页，都能整理成正式展示页面。</span>
+          <p class="hero-desc">
+            我们可以帮你把静态网页整理、包装、发布到线上，让原本只躺在文件夹里的页面，变成可以直接发给客户、团队和合作方的正式入口。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
+            <a class="button button-secondary" href="#capability">查看服务</a>
           </div>
-          <div class="tag-item">
-            <strong>交付更直接</strong>
-            <span>不是只给源文件，而是给你真正可打开、可传播、可继续迭代的线上页面。</span>
-          </div>
-          <div class="tag-item">
-            <strong>页面气质可调</strong>
-            <span>可以极简，也可以像现在这样偏实验、偏炫酷、偏视觉冲击。</span>
+          <div class="tag-field">
+            <div class="tag-item">
+              <strong>适合快上线</strong>
+              <span>有页面、有想法、要尽快拿出一个能访问的链接，就很适合直接推进。</span>
+            </div>
+            <div class="tag-item">
+              <strong>适合做宣传</strong>
+              <span>企业介绍、产品页、作品集、活动页、招募页，都能整理成正式展示页面。</span>
+            </div>
+            <div class="tag-item">
+              <strong>交付更直接</strong>
+              <span>不是只给源文件，而是给你真正可打开、可传播、可继续迭代的线上页面。</span>
+            </div>
+            <div class="tag-item">
+              <strong>页面气质可调</strong>
+              <span>可以极简，也可以偏实验、偏科技、偏视觉冲击，但结构会保持清楚。</span>
+            </div>
           </div>
         </div>
       </div>
@@ -812,100 +853,102 @@
       </div>
     </section>
 
-    <section class="content-grid" id="capability">
-      <article class="panel">
-        <h2>我们做的，不只是把文件传上去</h2>
-        <p style="margin-top: 18px;">
-          更重要的是把你现在手里的网页内容整理成一个更能对外展示的版本，让访问者一打开就知道你是谁、你能做什么、下一步该怎么联系你。
-        </p>
-        <div class="number-stack">
-          <div class="number-row">
-            <strong>01</strong>
-            <span>把已有静态页面整理成更适合发布的版本，避免页面只是像一个测试稿。</span>
-          </div>
-          <div class="number-row">
-            <strong>02</strong>
-            <span>根据业务定位调整首页内容，让它更像一个能用来接客户和展示服务的入口。</span>
-          </div>
-          <div class="number-row">
-            <strong>03</strong>
-            <span>完成部署、更新和交付，让你拿到的是线上页面，不是还要自己折腾的半成品。</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="service-showcase">
-        <div class="showcase-image">
-          <img src="./assets/service-grid.jpg" alt="蓝色科技感的网页模块展示图" />
-        </div>
-        <div class="showcase-copy">
-          <div>
-            <h2>能做成什么样，看定位</h2>
-            <p style="margin-top: 16px;">
-              如果你想要的不是普通模板感页面，而是更有记忆点的展示方式，我们也可以把网站做得更有造型、更有视觉冲击。
-            </p>
-            <div class="showcase-list">
-              <div class="showcase-item">
-                <strong>宣传型首页</strong>
-                <span>重点是先抓眼球，再清楚讲业务，让访问者留下印象。</span>
-              </div>
-              <div class="showcase-item">
-                <strong>产品型落地页</strong>
-                <span>适合展示功能、服务、卖点和联系入口，让页面承担转化作用。</span>
-              </div>
-              <div class="showcase-item">
-                <strong>专题型展示页</strong>
-                <span>适合活动、提案、案例、作品和短期项目，用一个链接快速传播。</span>
-              </div>
+    <div class="section-shell">
+      <section class="content-grid" id="capability">
+        <article class="panel">
+          <h2>我们做的，不只是把文件传上去</h2>
+          <p style="margin-top: 18px;">
+            更重要的是把你现在手里的网页内容整理成一个更能对外展示的版本，让访问者一打开就知道你是谁、你能做什么、下一步该怎么联系你。
+          </p>
+          <div class="number-stack">
+            <div class="number-row">
+              <strong>01</strong>
+              <span>把已有静态页面整理成更适合发布的版本，避免页面只是像一个测试稿。</span>
+            </div>
+            <div class="number-row">
+              <strong>02</strong>
+              <span>根据业务定位调整首页内容，让它更像一个能用来接客户和展示服务的入口。</span>
+            </div>
+            <div class="number-row">
+              <strong>03</strong>
+              <span>完成部署、更新和交付，让你拿到的是线上页面，不是还要自己折腾的半成品。</span>
             </div>
           </div>
+        </article>
+
+        <article class="service-showcase">
+          <div class="showcase-image">
+            <img src="./assets/service-grid.jpg" alt="蓝色科技感的网页模块展示图" />
+          </div>
+          <div class="showcase-copy">
+            <div>
+              <h2>炫酷可以有，但结构要稳</h2>
+              <p style="margin-top: 16px;">
+                这次我把页面重新收束成更清楚的全屏落地页，让视觉冲击留在主图、标题和质感里，而不是让整个版面失控。
+              </p>
+              <div class="showcase-list">
+                <div class="showcase-item">
+                  <strong>宣传型首页</strong>
+                  <span>重点是先抓眼球，再清楚讲业务，让访问者留下印象。</span>
+                </div>
+                <div class="showcase-item">
+                  <strong>产品型落地页</strong>
+                  <span>适合展示功能、服务、卖点和联系入口，让页面承担转化作用。</span>
+                </div>
+                <div class="showcase-item">
+                  <strong>专题型展示页</strong>
+                  <span>适合活动、提案、案例、作品和短期项目，用一个链接快速传播。</span>
+                </div>
+              </div>
+            </div>
+            <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="strip-layout" id="scene">
+        <article class="contact-card" id="contact">
+          <h2>你给内容，我们来把它推上线</h2>
+          <p>
+            如果你现在已经有网页文件、草稿、文案，或者只是有一个想要尽快发出去的展示需求，都可以直接往这个方向推进。
+          </p>
+          <ul>
+            <li>
+              <strong>企业介绍</strong>
+              用于展示公司、团队、服务、合作方式，适合商务介绍和品牌曝光。
+            </li>
+            <li>
+              <strong>产品页面</strong>
+              用于展示功能、方案和价值点，适合产品说明和业务承接。
+            </li>
+            <li>
+              <strong>活动专题</strong>
+              用于活动传播、报名招募、临时专题宣传，重在上线快和传播方便。
+            </li>
+          </ul>
           <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
+        </article>
+
+        <div class="quote-wall">
+          <article class="quote">
+            <strong>不想让页面只停在本地</strong>
+            <p>很多网页其实已经能看了，只差最后一步整理和发布。这个环节补上，页面才真正能开始工作。</p>
+          </article>
+          <article class="quote">
+            <strong>不想看起来像测试稿</strong>
+            <p>上线不只是访问成功，更是让页面的呈现方式、信息顺序和视觉气质看起来更像正式作品。</p>
+          </article>
+          <article class="quote">
+            <strong>想直接拿链接去展示</strong>
+            <p>无论是发给客户、同事、投资人还是合作方，一个能直接打开的页面，表达效率会高很多。</p>
+          </article>
         </div>
-      </article>
-    </section>
-
-    <section class="strip-layout" id="scene">
-      <article class="contact-card" id="contact">
-        <h2>你给内容，我们来把它推上线</h2>
-        <p>
-          如果你现在已经有网页文件、草稿、文案，或者只是有一个想要尽快发出去的展示需求，都可以直接往这个方向推进。
-        </p>
-        <ul>
-          <li>
-            <strong>企业介绍</strong>
-            用于展示公司、团队、服务、合作方式，适合商务介绍和品牌曝光。
-          </li>
-          <li>
-            <strong>产品页面</strong>
-            用于展示功能、方案和价值点，适合产品说明和业务承接。
-          </li>
-          <li>
-            <strong>活动专题</strong>
-            用于活动传播、报名招募、临时专题宣传，重在上线快和传播方便。
-          </li>
-        </ul>
-        <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
-      </article>
-
-      <div class="quote-wall">
-        <article class="quote">
-          <strong>不想让页面只停在本地</strong>
-          <p>很多网页其实已经能看了，只差最后一步整理和发布。这个环节补上，页面才真正能开始工作。</p>
-        </article>
-        <article class="quote">
-          <strong>不想看起来像测试稿</strong>
-          <p>上线不只是访问成功，更是让页面的呈现方式、信息顺序和视觉气质看起来更像正式作品。</p>
-        </article>
-        <article class="quote">
-          <strong>想直接拿链接去展示</strong>
-          <p>无论是发给客户、同事、投资人还是合作方，一个能直接打开的页面，表达效率会高很多。</p>
-        </article>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <footer class="footer">
       <small>
-        现在这版已经切成更偏实验感的风格。如果你还想更激进一点，我还能继续往更怪、更潮、更像创意机构官网的方向改。
+        现在这版改成了全屏展开、秩序更强的结构。如果你还想继续提气质，我可以再往更高级或更简洁的方向收。
       </small>
       <a class="button button-secondary" href="mailto:hello@example.com">继续改风格</a>
     </footer>
