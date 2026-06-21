@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>测试网站</title>
+  <title>静态网页发布服务</title>
   <style>
-    /* 页面基础样式 */
+    /* 全局颜色和阴影变量 */
     :root {
       color-scheme: light;
-      --bg: #f4f7fb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --subtle: #6b7280;
-      --primary: #2563eb;
-      --primary-soft: #dbeafe;
-      --border: #e5e7eb;
-      --shadow: 0 20px 45px rgba(37, 99, 235, 0.12);
+      --bg: #081120;
+      --bg-soft: #101b31;
+      --panel: rgba(10, 18, 32, 0.78);
+      --panel-strong: rgba(14, 25, 46, 0.96);
+      --line: rgba(148, 163, 184, 0.2);
+      --text: #e5eefc;
+      --subtle: #9fb0cc;
+      --primary: #60a5fa;
+      --primary-strong: #2563eb;
+      --success: #34d399;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
     }
 
     * {
@@ -24,122 +27,439 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
       font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
-      background:
-        radial-gradient(circle at top right, #dbeafe 0, transparent 28%),
-        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
       color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.35), transparent 30%),
+        radial-gradient(circle at right center, rgba(52, 211, 153, 0.18), transparent 24%),
+        linear-gradient(180deg, #07101d 0%, #0a1426 45%, #081120 100%);
     }
 
-    .card {
-      width: min(760px, 100%);
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 48px;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(8, 17, 32, 0.65);
+      backdrop-filter: blur(18px);
       box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary-strong), var(--success));
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--subtle);
+      font-size: 14px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .hero-card,
+    .side-card,
+    .section,
+    .footer {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 56px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 14px;
+      padding: 10px 16px;
       border-radius: 999px;
-      background: var(--primary-soft);
-      color: var(--primary);
+      background: rgba(96, 165, 250, 0.14);
+      border: 1px solid rgba(96, 165, 250, 0.22);
+      color: #bfdbfe;
       font-size: 14px;
       font-weight: 600;
     }
 
     h1 {
-      margin: 20px 0 16px;
-      font-size: clamp(32px, 6vw, 52px);
-      line-height: 1.1;
+      margin: 22px 0 18px;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
     }
 
-    p {
-      margin: 0;
+    .hero-desc {
+      max-width: 680px;
       font-size: 18px;
-      line-height: 1.8;
+      line-height: 1.85;
       color: var(--subtle);
     }
 
-    .panel {
-      margin-top: 28px;
-      padding: 20px 22px;
-      border-radius: 18px;
-      background: #f9fbff;
-      border: 1px dashed #bfdbfe;
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
     }
 
-    .meta {
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(148, 163, 184, 0.26);
+      background: rgba(15, 23, 42, 0.45);
+      color: #dbeafe;
+    }
+
+    .trust-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
       margin-top: 28px;
+      padding: 0;
+      list-style: none;
+      color: #d6e3f8;
+    }
+
+    .trust-list li {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(15, 23, 42, 0.45);
+      font-size: 14px;
+    }
+
+    .side-card {
+      padding: 28px;
+      background: var(--panel-strong);
+    }
+
+    .stat-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 14px;
     }
 
-    .item {
-      padding: 18px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid var(--border);
+    .stat-item {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(148, 163, 184, 0.12);
     }
 
-    .item strong {
+    .stat-item strong {
       display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
+      margin-bottom: 10px;
       color: var(--subtle);
-    }
-
-    .item span {
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 600;
     }
 
-    @media (max-width: 640px) {
-      .card {
-        padding: 28px 20px;
-        border-radius: 18px;
+    .stat-item span {
+      display: block;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: 34px;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+
+    .section-desc {
+      margin: 0;
+      color: var(--subtle);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .feature,
+    .step,
+    .case {
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .feature h3,
+    .step h3,
+    .case h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .feature p,
+    .step p,
+    .case p {
+      margin: 0;
+      color: var(--subtle);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .step-index {
+      width: 34px;
+      height: 34px;
+      margin-bottom: 14px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(96, 165, 250, 0.16);
+      color: #bfdbfe;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 24px;
+      padding: 28px 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer p {
+      margin: 0;
+      color: var(--subtle);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 960px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
       }
 
-      p {
-        font-size: 16px;
+      .hero-card,
+      .section,
+      .footer {
+        padding: 28px 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 12px;
+      }
+
+      .nav,
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .hero-desc,
+      .section-desc,
+      .footer p {
+        font-size: 15px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <div class="badge">BytePlus Pages 测试站点</div>
-    <h1>部署链路已经打通</h1>
-    <p>这是一个用于验证静态网站发布流程的测试页面。只要完成 BytePlus 账号和 AK/SK 配置，就可以把这个页面正式部署到线上。</p>
+  <div class="page">
+    <header class="nav">
+      <div class="brand">
+        <div class="brand-mark">发</div>
+        <span>静态网页发布服务</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#service">服务内容</a>
+        <a href="#process">合作流程</a>
+        <a href="#cases">适用场景</a>
+      </nav>
+    </header>
 
-    <section class="panel">
-      <p>如果你现在能看到这段内容，说明测试站点文件已经准备完成，下一步只需要完成 BytePlus 控制台侧的授权与开通。</p>
+    <section class="hero">
+      <div class="hero-card">
+        <div class="badge">可帮你发布静态网页 · 宣传页 · 展示页 · 活动页</div>
+        <h1>我们可以帮你把静态网页快速发布上线</h1>
+        <p class="hero-desc">
+          无论你是做企业展示、产品介绍、活动宣传，还是个人作品集、临时落地页，我们都可以帮你把静态网页整理、部署、发布到线上，让页面尽快可访问、可分享、可交付。
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:hello@example.com">立即咨询发布</a>
+          <a class="btn btn-secondary" href="#process">查看合作流程</a>
+        </div>
+        <ul class="trust-list">
+          <li>支持 HTML 静态站</li>
+          <li>支持 GitHub Pages 发布</li>
+          <li>适合展示页与宣传页</li>
+          <li>上线速度快</li>
+        </ul>
+      </div>
+
+      <aside class="side-card">
+        <div class="stat-grid">
+          <div class="stat-item">
+            <strong>可承接内容</strong>
+            <span>静态网页发布</span>
+          </div>
+          <div class="stat-item">
+            <strong>适合项目</strong>
+            <span>宣传页 / 官网页 / 活动页</span>
+          </div>
+          <div class="stat-item">
+            <strong>交付重点</strong>
+            <span>快速上线与稳定访问</span>
+          </div>
+        </div>
+      </aside>
     </section>
 
-    <section class="meta">
-      <div class="item">
-        <strong>站点类型</strong>
-        <span>纯静态 HTML</span>
-      </div>
-      <div class="item">
-        <strong>部署目标</strong>
-        <span>BytePlus Edge Pages</span>
-      </div>
-      <div class="item">
-        <strong>当前状态</strong>
-        <span>等待账号配置</span>
+    <section class="section" id="service">
+      <h2 class="section-title">服务内容</h2>
+      <p class="section-desc">
+        我们可以围绕静态网页发布这一类业务，提供从页面整理到线上发布的一整套支持，适合需要快速出结果、快速给客户或团队展示的场景。
+      </p>
+      <div class="grid">
+        <article class="feature">
+          <h3>静态网页上线</h3>
+          <p>帮你把已有的静态页面整理成可上线版本，处理基础结构、首页入口和发布所需文件，方便直接部署。</p>
+        </article>
+        <article class="feature">
+          <h3>宣传页落地</h3>
+          <p>适合业务介绍、产品说明、服务宣传、活动报名等页面，把核心信息更清晰地呈现出来。</p>
+        </article>
+        <article class="feature">
+          <h3>发布与交付</h3>
+          <p>帮助你把页面发布到线上，生成可访问链接，方便发给客户、同事或合作方查看和验收。</p>
+        </article>
       </div>
     </section>
-  </main>
+
+    <section class="section" id="process">
+      <h2 class="section-title">合作流程</h2>
+      <p class="section-desc">
+        整个过程尽量保持简单，核心目标是让页面尽快上线，而不是把流程做复杂。
+      </p>
+      <div class="grid">
+        <article class="step">
+          <div class="step-index">01</div>
+          <h3>确认页面内容</h3>
+          <p>你提供现有网页文件、文案、品牌信息或业务需求，我们先明确页面要展示什么内容。</p>
+        </article>
+        <article class="step">
+          <div class="step-index">02</div>
+          <h3>整理上线版本</h3>
+          <p>根据发布平台要求整理静态资源、入口文件和展示结构，确保页面可正常访问。</p>
+        </article>
+        <article class="step">
+          <div class="step-index">03</div>
+          <h3>发布并交付链接</h3>
+          <p>完成部署后，把线上地址交给你，后续如果要改字、换图、继续迭代，也能接着维护。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="cases">
+      <h2 class="section-title">适用场景</h2>
+      <p class="section-desc">
+        如果你现在有“页面已经有了，但还没上线”或者“需要一个能直接发出去的宣传链接”的需求，这类场景都很适合。
+      </p>
+      <div class="grid">
+        <article class="case">
+          <h3>企业宣传页</h3>
+          <p>用于对外介绍公司、团队、服务能力、案例内容，适合商务沟通和客户初步了解。</p>
+        </article>
+        <article class="case">
+          <h3>产品展示页</h3>
+          <p>用于展示产品亮点、核心功能、价格方案、联系方式，让用户更快理解你的业务。</p>
+        </article>
+        <article class="case">
+          <h3>活动与专题页</h3>
+          <p>适合临时活动、专题介绍、招募页面等，重点是上线快、传播方便、修改成本低。</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        如果你需要的是“帮我把静态网页做出来并发布到线上”，这类业务我们可以直接支持。你给内容，我们来帮你整理、发布、交付。
+      </p>
+      <a class="btn btn-primary" href="mailto:hello@example.com">联系发布</a>
+    </footer>
+  </div>
 </body>
 </html>
