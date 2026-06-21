@@ -5,7 +5,13 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    // 使用相对资源路径，兼容 GitHub Pages 的仓库路径和自定义域名发布。
+    base: './',
     plugins: [react(), tailwindcss()],
+    build: {
+      // 直接输出到 docs 目录，方便 GitHub Pages 选择 /docs 作为发布源。
+      outDir: 'docs',
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
