@@ -7,19 +7,18 @@
   <style>
     /* 页面主题变量 */
     :root {
-      color-scheme: dark;
-      --bg: #050814;
-      --bg-soft: #0a1226;
-      --surface: rgba(10, 18, 36, 0.76);
-      --surface-strong: rgba(8, 14, 28, 0.92);
-      --text: #eef3ff;
-      --muted: #95a7ca;
-      --line: rgba(98, 133, 255, 0.2);
-      --accent: #4b7cff;
-      --accent-soft: rgba(75, 124, 255, 0.14);
+      color-scheme: light;
+      --bg: #f3efe7;
+      --bg-soft: #e8e2d8;
+      --ink: #101114;
+      --muted: #5f646d;
+      --line: rgba(16, 17, 20, 0.12);
+      --accent: #2c4fbe;
+      --accent-soft: rgba(44, 79, 190, 0.12);
+      --paper: rgba(255, 255, 255, 0.58);
       --radius: 24px;
-      --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
-      --max: 1240px;
+      --max: 1320px;
+      --shadow: 0 22px 60px rgba(16, 17, 20, 0.08);
     }
 
     * {
@@ -34,12 +33,11 @@
       margin: 0;
       min-height: 100dvh;
       overflow-x: hidden;
-      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
-      color: var(--text);
+      font-family: "Plus Jakarta Sans", "Clash Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
       background:
-        radial-gradient(circle at 8% 10%, rgba(75, 124, 255, 0.2), transparent 24%),
-        radial-gradient(circle at 92% 20%, rgba(75, 124, 255, 0.16), transparent 18%),
-        linear-gradient(180deg, #040814 0%, #050c1d 36%, #030711 100%);
+        radial-gradient(circle at 10% 12%, rgba(44, 79, 190, 0.12), transparent 18%),
+        linear-gradient(180deg, #f4f0e8 0%, #f0ebe2 48%, #ece6dc 100%);
     }
 
     body::before {
@@ -47,12 +45,11 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 34px 34px;
-      mask-image: radial-gradient(circle at center, black 52%, transparent 96%);
+        linear-gradient(rgba(16, 17, 20, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 17, 20, 0.02) 1px, transparent 1px);
+      background-size: 26px 26px;
       pointer-events: none;
-      opacity: 0.42;
+      opacity: 0.8;
       z-index: 0;
     }
 
@@ -73,18 +70,12 @@
     }
 
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 30;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      min-height: 72px;
-      padding: 16px max(18px, calc((100vw - var(--max)) / 2));
-      border-bottom: 1px solid var(--line);
-      background: rgba(4, 8, 20, 0.72);
-      backdrop-filter: blur(16px);
+      min-height: 84px;
+      padding: 18px max(20px, calc((100vw - var(--max)) / 2));
     }
 
     .brand {
@@ -100,11 +91,11 @@
       place-items: center;
       border-radius: 14px;
       background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent),
-        linear-gradient(135deg, #173574, var(--accent));
-      border: 1px solid rgba(255, 255, 255, 0.16);
+        linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent),
+        linear-gradient(135deg, #16307c, var(--accent));
+      border: 1px solid rgba(44, 79, 190, 0.16);
       font-weight: 800;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      color: #ffffff;
     }
 
     .brand-copy strong,
@@ -133,7 +124,7 @@
     }
 
     .nav a:hover {
-      color: var(--text);
+      color: var(--ink);
     }
 
     .button {
@@ -155,39 +146,38 @@
     }
 
     .button-primary {
-      background: linear-gradient(135deg, #2d57ff, #4b7cff);
+      background: linear-gradient(135deg, #2441a7, #2c4fbe);
       color: #ffffff;
-      box-shadow: 0 16px 40px rgba(75, 124, 255, 0.32);
+      box-shadow: 0 16px 34px rgba(44, 79, 190, 0.2);
     }
 
     .button-secondary {
       border-color: var(--line);
-      background: rgba(255, 255, 255, 0.02);
-      color: #dfe8ff;
+      background: rgba(255, 255, 255, 0.38);
+      color: var(--ink);
     }
 
     .hero {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(340px, 0.82fr);
-      gap: 0;
-      min-height: calc(100dvh - 72px);
+      grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+      gap: 28px;
+      min-height: calc(100dvh - 84px);
       align-items: stretch;
-      overflow: hidden;
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 8px 0 28px;
     }
 
     .hero-copy {
       position: relative;
       display: flex;
       align-items: center;
-      padding: 48px max(18px, calc((100vw - var(--max)) / 2)) 56px;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(75, 124, 255, 0.12), transparent 28%),
-        linear-gradient(180deg, rgba(7, 14, 30, 0.92), rgba(4, 8, 20, 0.98));
+      padding: 48px 0 42px;
     }
 
     .hero-copy-inner {
-      max-width: 640px;
+      max-width: 720px;
     }
 
     .eyebrow {
@@ -197,8 +187,8 @@
       padding: 10px 14px;
       border-radius: 999px;
       background: var(--accent-soft);
-      border: 1px solid rgba(75, 124, 255, 0.26);
-      color: #c7d8ff;
+      border: 1px solid rgba(44, 79, 190, 0.18);
+      color: var(--accent);
       font-size: 13px;
       font-weight: 700;
     }
@@ -209,23 +199,23 @@
       height: 8px;
       border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 14px rgba(75, 124, 255, 0.9);
+      box-shadow: 0 0 12px rgba(44, 79, 190, 0.45);
     }
 
     .headline-wrap {
       position: relative;
-      margin-top: 26px;
+      margin-top: 24px;
     }
 
     .outline-word {
       position: absolute;
-      top: -44px;
-      left: 8%;
-      font-size: clamp(92px, 16vw, 188px);
+      top: -26px;
+      left: 2%;
+      font-size: clamp(88px, 14vw, 156px);
       font-weight: 900;
       letter-spacing: 0.04em;
       color: transparent;
-      -webkit-text-stroke: 1px rgba(148, 180, 255, 0.12);
+      -webkit-text-stroke: 1px rgba(16, 17, 20, 0.08);
       text-transform: uppercase;
       user-select: none;
       pointer-events: none;
@@ -234,12 +224,13 @@
     h1 {
       position: relative;
       z-index: 1;
-      max-width: 7.6em;
+      max-width: 8em;
       margin: 0;
-      font-size: clamp(44px, 6vw, 84px);
-      line-height: 0.98;
+      font-size: clamp(48px, 6vw, 94px);
+      line-height: 0.94;
       letter-spacing: -0.05em;
       text-transform: uppercase;
+      font-weight: 800;
     }
 
     h1 span {
@@ -248,44 +239,45 @@
 
     h1 .ghost {
       color: transparent;
-      -webkit-text-stroke: 1px rgba(223, 234, 255, 0.86);
+      -webkit-text-stroke: 1px rgba(16, 17, 20, 0.7);
     }
 
     .hero-desc {
       position: relative;
       z-index: 1;
-      max-width: 31em;
-      margin: 26px 0 0;
+      max-width: 29em;
+      margin: 24px 0 0;
       color: var(--muted);
       font-size: 18px;
-      line-height: 1.85;
+      line-height: 1.8;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 28px;
+      margin-top: 30px;
     }
 
     .tag-field {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 30px;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 42px;
     }
 
     .tag-item {
-      padding: 16px 18px;
+      padding: 18px 18px 20px;
       border-radius: 18px;
-      border: 1px solid rgba(111, 145, 242, 0.18);
-      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.44);
+      box-shadow: var(--shadow);
     }
 
     .tag-item strong {
       display: block;
       margin-bottom: 8px;
-      color: #dfe8ff;
+      color: var(--ink);
       font-size: 15px;
     }
 
@@ -298,20 +290,25 @@
     .hero-visual {
       position: relative;
       min-height: 100%;
-      background: linear-gradient(180deg, rgba(11, 21, 46, 0.94), rgba(8, 14, 28, 0.98));
+      display: flex;
+      align-items: stretch;
     }
 
     .visual-frame {
       position: relative;
       height: 100%;
       overflow: hidden;
-      background: #020511;
+      width: 100%;
+      min-height: 100%;
+      border-radius: 28px;
+      background: #dbd5cc;
+      box-shadow: var(--shadow);
     }
 
     .visual-frame img {
       height: 100%;
       object-fit: cover;
-      transform: scale(1.02);
+      transform: scale(1.01);
       animation: drift 12s ease-in-out infinite;
     }
 
@@ -321,25 +318,25 @@
       position: absolute;
       z-index: 2;
       border-radius: 999px;
-      background: rgba(5, 10, 20, 0.82);
-      border: 1px solid rgba(120, 154, 255, 0.18);
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid rgba(16, 17, 20, 0.08);
       backdrop-filter: blur(12px);
     }
 
     .visual-frame::before {
-      width: 210px;
-      height: 54px;
-      top: 26px;
-      right: 26px;
-      transform: rotate(-9deg);
+      width: 180px;
+      height: 44px;
+      top: 34px;
+      right: 34px;
+      transform: rotate(-7deg);
     }
 
     .visual-frame::after {
-      width: 180px;
-      height: 180px;
-      bottom: -24px;
-      left: -30px;
-      transform: rotate(18deg);
+      width: 170px;
+      height: 170px;
+      bottom: -20px;
+      left: -20px;
+      transform: rotate(12deg);
     }
 
     .visual-label {
@@ -348,14 +345,15 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      right: 32px;
-      top: 34px;
+      right: 42px;
+      top: 42px;
       padding: 12px 16px;
       border-radius: 999px;
-      background: rgba(5, 11, 23, 0.8);
-      border: 1px solid rgba(119, 154, 255, 0.24);
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(16, 17, 20, 0.08);
       font-size: 13px;
       font-weight: 700;
+      color: var(--ink);
     }
 
     .visual-label::before {
@@ -364,19 +362,19 @@
       height: 8px;
       border-radius: 999px;
       background: var(--accent);
-      box-shadow: 0 0 12px rgba(75, 124, 255, 0.85);
+      box-shadow: 0 0 12px rgba(44, 79, 190, 0.4);
     }
 
     .visual-note {
       position: absolute;
-      left: 32px;
-      bottom: 32px;
+      right: 36px;
+      bottom: 36px;
       z-index: 3;
-      max-width: 240px;
-      padding: 16px;
+      max-width: 280px;
+      padding: 18px;
       border-radius: 20px;
-      background: rgba(5, 11, 23, 0.78);
-      border: 1px solid rgba(119, 154, 255, 0.18);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(16, 17, 20, 0.08);
     }
 
     .visual-note strong,
@@ -387,6 +385,7 @@
     .visual-note strong {
       margin-bottom: 8px;
       font-size: 14px;
+      color: var(--ink);
     }
 
     .visual-note span {
@@ -399,7 +398,8 @@
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
       padding: 14px 0;
-      background: rgba(7, 14, 30, 0.86);
+      background: rgba(255, 255, 255, 0.32);
+      overflow: hidden;
     }
 
     .marquee-track {
@@ -411,7 +411,7 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       font-size: 13px;
-      color: #dce7ff;
+      color: var(--ink);
       white-space: nowrap;
     }
 
@@ -426,18 +426,18 @@
 
     .content-grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 18px;
-      padding: 30px 0 0;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 22px;
+      padding: 42px 0 0;
     }
 
     .panel {
       position: relative;
-      padding: 28px;
+      padding: 34px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--surface);
-      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.54);
+      backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
       min-height: 100%;
     }
@@ -468,18 +468,18 @@
 
     .number-row {
       display: grid;
-      grid-template-columns: 88px 1fr;
+      grid-template-columns: 72px 1fr;
       gap: 14px;
       align-items: start;
       padding: 18px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(112, 147, 255, 0.14);
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid var(--line);
     }
 
     .number-row strong {
-      font-size: 28px;
-      color: #cfe0ff;
+      font-size: 24px;
+      color: var(--accent);
       line-height: 1;
     }
 
@@ -492,13 +492,13 @@
     .service-showcase {
       position: relative;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1fr 0.88fr;
       gap: 0;
       min-height: 520px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--surface);
-      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.54);
+      backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
@@ -521,21 +521,21 @@
       width: 160px;
       height: 160px;
       border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(16, 17, 20, 0.08);
       background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent),
-        rgba(3, 8, 20, 0.42);
-      backdrop-filter: blur(16px);
+        linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent),
+        rgba(255, 255, 255, 0.44);
+      backdrop-filter: blur(12px);
       transform: rotate(13deg);
     }
 
     .showcase-copy {
       position: relative;
-      padding: 34px 28px;
+      padding: 36px 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: linear-gradient(180deg, rgba(8, 15, 32, 0.98), rgba(5, 11, 24, 0.98));
+      background: rgba(247, 243, 236, 0.82);
     }
 
     .showcase-list {
@@ -547,7 +547,7 @@
     .showcase-item {
       padding: 18px 18px 18px 20px;
       border-left: 2px solid var(--accent);
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.62);
       border-radius: 18px;
     }
 
@@ -559,7 +559,7 @@
     .showcase-item strong {
       margin-bottom: 8px;
       font-size: 16px;
-      color: #e8efff;
+      color: var(--ink);
     }
 
     .showcase-item span {
@@ -570,27 +570,27 @@
 
     .strip-layout {
       display: grid;
-      grid-template-columns: 0.78fr 1.22fr;
-      gap: 18px;
-      padding: 18px 0 0;
+      grid-template-columns: 0.76fr 1.24fr;
+      gap: 22px;
+      padding: 22px 0 0;
     }
 
     .contact-card {
       position: relative;
-      padding: 28px;
+      padding: 34px;
       display: grid;
       gap: 18px;
       align-content: start;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--surface);
-      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.54);
+      backdrop-filter: blur(14px);
       box-shadow: var(--shadow);
     }
 
     .contact-card ul {
       display: grid;
-      gap: 12px;
+      gap: 14px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -599,8 +599,8 @@
     .contact-card li {
       padding: 16px 18px;
       border-radius: 18px;
-      border: 1px solid rgba(112, 147, 255, 0.14);
-      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.56);
       color: var(--muted);
       line-height: 1.75;
       font-size: 14px;
@@ -615,15 +615,15 @@
 
     .quote-wall {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: 1.05fr 0.95fr 1fr;
+      gap: 22px;
     }
 
     .quote {
       padding: 24px;
-      border: 1px solid rgba(112, 147, 255, 0.14);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: rgba(8, 15, 32, 0.82);
+      background: rgba(255, 255, 255, 0.54);
       box-shadow: var(--shadow);
     }
 
@@ -648,11 +648,11 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      margin: 18px auto 0;
+      margin: 26px auto 0;
       padding: 22px 24px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: rgba(4, 8, 20, 0.86);
+      background: rgba(255, 255, 255, 0.54);
       box-shadow: var(--shadow);
     }
 
@@ -674,10 +674,10 @@
     @keyframes drift {
       0%,
       100% {
-        transform: scale(1.04) translate3d(0, 0, 0);
+        transform: scale(1.01) translate3d(0, 0, 0);
       }
       50% {
-        transform: scale(1.08) translate3d(-10px, -10px, 0);
+        transform: scale(1.04) translate3d(-8px, -8px, 0);
       }
     }
 
@@ -701,19 +701,14 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-visual,
-      .showcase-image {
-        min-height: auto;
-      }
-
       .hero {
         min-height: auto;
+        width: calc(100% - 36px);
+        padding-top: 0;
       }
 
       .hero-copy {
-        min-height: auto;
-        padding-top: 42px;
-        padding-bottom: 42px;
+        padding: 24px 0 8px;
       }
 
       .showcase-image {
@@ -733,7 +728,6 @@
         padding-right: 16px;
       }
 
-      .hero-copy,
       .panel,
       .showcase-copy,
       .contact-card {
@@ -741,8 +735,7 @@
       }
 
       .hero-copy {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding: 18px 0 0;
       }
 
       .tag-field,
@@ -755,18 +748,34 @@
       }
 
       h1 {
-        font-size: 46px;
+        font-size: 52px;
       }
 
       .outline-word {
         left: 0;
-        top: -16px;
-        font-size: 98px;
+        top: -10px;
+        font-size: 82px;
       }
 
       .section-shell,
       .footer {
         width: calc(100% - 16px);
+      }
+
+      .hero {
+        width: calc(100% - 16px);
+      }
+
+      .visual-label {
+        top: 18px;
+        right: 18px;
+      }
+
+      .visual-note {
+        right: 18px;
+        bottom: 18px;
+        left: 18px;
+        max-width: none;
       }
     }
   </style>
@@ -793,36 +802,36 @@
         <div class="hero-copy-inner">
           <div class="eyebrow">静态网页 · 宣传页 · 展示页 · 活动页</div>
           <div class="headline-wrap">
-            <div class="outline-word">SHIP</div>
+            <div class="outline-word">STUDIO</div>
             <h1>
-              <span>MAKE</span>
-              <span class="ghost">YOUR PAGE</span>
-              <span>GO LIVE</span>
+              <span>CREATIVE</span>
+              <span class="ghost">WEB LAUNCH</span>
+              <span>STUDIO</span>
             </h1>
           </div>
           <p class="hero-desc">
-            我们可以帮你把静态网页整理、包装、发布到线上，让原本只躺在文件夹里的页面，变成可以直接发给客户、团队和合作方的正式入口。
+            我们把静态网页做成更像创意工作室官网的表达方式，再帮你发布到线上。不是普通模板页，而是能代表业务气质、拿得出手的正式门面。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
-            <a class="button button-secondary" href="#capability">查看服务</a>
+            <a class="button button-secondary" href="#capability">查看作品方式</a>
           </div>
           <div class="tag-field">
             <div class="tag-item">
-              <strong>适合快上线</strong>
-              <span>有页面、有想法、要尽快拿出一个能访问的链接，就很适合直接推进。</span>
+              <strong>像创意机构官网</strong>
+              <span>大留白、强排版、图像驱动、节奏清楚，整体更像真正的工作室展示页。</span>
             </div>
             <div class="tag-item">
-              <strong>适合做宣传</strong>
-              <span>企业介绍、产品页、作品集、活动页、招募页，都能整理成正式展示页面。</span>
+              <strong>能承接宣传业务</strong>
+              <span>企业介绍、品牌服务、活动专题、产品展示，都能落成一页式高质量线上入口。</span>
             </div>
             <div class="tag-item">
-              <strong>交付更直接</strong>
-              <span>不是只给源文件，而是给你真正可打开、可传播、可继续迭代的线上页面。</span>
+              <strong>上线快但不粗糙</strong>
+              <span>不是只把文件扔上去，而是整理成更完整的叙事和版面后再发布。</span>
             </div>
             <div class="tag-item">
-              <strong>页面气质可调</strong>
-              <span>可以极简，也可以偏实验、偏科技、偏视觉冲击，但结构会保持清楚。</span>
+              <strong>适合对外展示</strong>
+              <span>最终给你的是一个可以发给客户、团队和合作方的正式页面，而不是测试稿。</span>
             </div>
           </div>
         </div>
@@ -830,11 +839,11 @@
 
       <div class="hero-visual">
         <div class="visual-frame">
-          <img src="./assets/hero-portal.jpg" alt="抽象的蓝色发布通道视觉图" />
-          <div class="visual-label">静态网页上线视觉</div>
+          <img src="./assets/studio-hero.jpg" alt="创意工作室风格的空间视觉图" />
+          <div class="visual-label">Creative launch direction</div>
           <div class="visual-note">
-            <strong>从页面到入口</strong>
-            <span>把一张静态网页，变成真正可以对外展示和分享的线上地址。</span>
+            <strong>从静态页面到正式门面</strong>
+            <span>把已有内容重新组织成更有气质的线上展示方式，然后交付可访问链接。</span>
           </div>
         </div>
       </div>
@@ -856,48 +865,48 @@
     <div class="section-shell">
       <section class="content-grid" id="capability">
         <article class="panel">
-          <h2>我们做的，不只是把文件传上去</h2>
+          <h2>我们做的，不只是把网页上线</h2>
           <p style="margin-top: 18px;">
-            更重要的是把你现在手里的网页内容整理成一个更能对外展示的版本，让访问者一打开就知道你是谁、你能做什么、下一步该怎么联系你。
+            更重要的是先把页面做成一个对外可展示的作品，再去完成发布。这样打开页面的人，看到的是完整表达，不是半成品。
           </p>
           <div class="number-stack">
             <div class="number-row">
               <strong>01</strong>
-              <span>把已有静态页面整理成更适合发布的版本，避免页面只是像一个测试稿。</span>
+              <span>重新梳理首屏、版式和图像，让页面更像创意工作室、品牌机构或高级展示站。</span>
             </div>
             <div class="number-row">
               <strong>02</strong>
-              <span>根据业务定位调整首页内容，让它更像一个能用来接客户和展示服务的入口。</span>
+              <span>按业务定位重排信息层级，让访问者更快理解你能做什么、适合谁、怎么联系你。</span>
             </div>
             <div class="number-row">
               <strong>03</strong>
-              <span>完成部署、更新和交付，让你拿到的是线上页面，不是还要自己折腾的半成品。</span>
+              <span>最后完成部署、更新和交付，把静态网页变成一个真正可传播、可继续维护的线上门面。</span>
             </div>
           </div>
         </article>
 
         <article class="service-showcase">
           <div class="showcase-image">
-            <img src="./assets/service-grid.jpg" alt="蓝色科技感的网页模块展示图" />
+            <img src="./assets/studio-detail.jpg" alt="创意工作室风格的物料桌面图" />
           </div>
           <div class="showcase-copy">
             <div>
-              <h2>炫酷可以有，但结构要稳</h2>
+              <h2>视觉表达，可以彻底换一种路数</h2>
               <p style="margin-top: 16px;">
-                这次我把页面重新收束成更清楚的全屏落地页，让视觉冲击留在主图、标题和质感里，而不是让整个版面失控。
+                不想要模板感，就不要继续修修补补。最有效的方式是直接换成创意机构官网的表达逻辑，让页面本身就像一个作品。
               </p>
               <div class="showcase-list">
                 <div class="showcase-item">
-                  <strong>宣传型首页</strong>
-                  <span>重点是先抓眼球，再清楚讲业务，让访问者留下印象。</span>
+                  <strong>创意工作室风格首页</strong>
+                  <span>更适合服务展示、品牌介绍、案例页面和有气质要求的宣传页。</span>
                 </div>
                 <div class="showcase-item">
-                  <strong>产品型落地页</strong>
-                  <span>适合展示功能、服务、卖点和联系入口，让页面承担转化作用。</span>
+                  <strong>高完成度视觉整理</strong>
+                  <span>主图、排版、内容块、按钮和节奏都重新组织，不再停留在普通测试页层级。</span>
                 </div>
                 <div class="showcase-item">
-                  <strong>专题型展示页</strong>
-                  <span>适合活动、提案、案例、作品和短期项目，用一个链接快速传播。</span>
+                  <strong>线上链接直接交付</strong>
+                  <span>最终交付的是已经上线、可直接展示的页面，不是还需要你继续补完的草稿。</span>
                 </div>
               </div>
             </div>
@@ -908,22 +917,22 @@
 
       <section class="strip-layout" id="scene">
         <article class="contact-card" id="contact">
-          <h2>你给内容，我们来把它推上线</h2>
+          <h2>你给内容，我们来把它做成能发出去的页面</h2>
           <p>
-            如果你现在已经有网页文件、草稿、文案，或者只是有一个想要尽快发出去的展示需求，都可以直接往这个方向推进。
+            如果你现在已经有网页文件、草稿、文案，或者只是有一个需要尽快发出去的展示需求，这种方式最适合直接推进。
           </p>
           <ul>
             <li>
               <strong>企业介绍</strong>
-              用于展示公司、团队、服务、合作方式，适合商务介绍和品牌曝光。
+              用于展示公司、团队、服务与合作方式，适合商务介绍与品牌曝光。
             </li>
             <li>
               <strong>产品页面</strong>
-              用于展示功能、方案和价值点，适合产品说明和业务承接。
+              用于展示产品、方案和价值点，适合服务说明与业务承接。
             </li>
             <li>
               <strong>活动专题</strong>
-              用于活动传播、报名招募、临时专题宣传，重在上线快和传播方便。
+              用于活动传播、报名招募、提案展示和临时专题宣传，重在上线快与传播方便。
             </li>
           </ul>
           <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
@@ -931,16 +940,16 @@
 
         <div class="quote-wall">
           <article class="quote">
-            <strong>不想让页面只停在本地</strong>
-            <p>很多网页其实已经能看了，只差最后一步整理和发布。这个环节补上，页面才真正能开始工作。</p>
+            <strong>不想只是一个能打开的网页</strong>
+            <p>很多页面已经有内容了，但还没有形成真正的视觉表达。把这一层补上，才更像正式作品。</p>
           </article>
           <article class="quote">
             <strong>不想看起来像测试稿</strong>
-            <p>上线不只是访问成功，更是让页面的呈现方式、信息顺序和视觉气质看起来更像正式作品。</p>
+            <p>上线不只是访问成功，更是让页面的结构、图像和气质看起来像一间真正的创意工作室。</p>
           </article>
           <article class="quote">
             <strong>想直接拿链接去展示</strong>
-            <p>无论是发给客户、同事、投资人还是合作方，一个能直接打开的页面，表达效率会高很多。</p>
+            <p>无论是发给客户、同事还是合作方，一个已经整理好的页面，表达效率都会高很多。</p>
           </article>
         </div>
       </section>
@@ -948,7 +957,7 @@
 
     <footer class="footer">
       <small>
-        现在这版改成了全屏展开、秩序更强的结构。如果你还想继续提气质，我可以再往更高级或更简洁的方向收。
+        这次已经完全换成创意工作室路线。如果你还想继续提纯，我下一步可以把它再往更高级、更多留白的方向收。
       </small>
       <a class="button button-secondary" href="mailto:hello@example.com">继续改风格</a>
     </footer>
