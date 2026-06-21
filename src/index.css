@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Geist:wght@100;300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Hanken Grotesk", sans-serif;
+  
+  --color-primary-gold: #d4a373;
+  --color-primary-gold-light: #f2be8c;
+  --color-accent-blue: #9bcbff;
+  --color-dark-bg: #0a0a0a;
+  --color-dark-surface: #131313;
+  --color-dark-surface-card: #1c1b1b;
+  --color-dark-surface-lowest: #0e0e0e;
+  --color-on-surface-variant: #d4c4b7;
+  --color-on-surface-default: #e5e2e1;
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(212, 163, 115, 0.4);
+  }
+  .text-glow-blue {
+    text-shadow: 0 0 20px rgba(155, 203, 255, 0.4);
+  }
+  .glass-card {
+    background: rgba(22, 22, 22, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+  }
+  .glass-card:hover {
+    border-color: #d4a373;
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px -15px rgba(212, 163, 115, 0.15);
+  }
+  .nav-underline {
+    position: relative;
+  }
+  .nav-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #f2be8c;
+    transition: width 0.3s ease;
+  }
+  .nav-underline:hover::after {
+    width: 100%;
+  }
+  .text-balance-cjk {
+    text-wrap: balance;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #e5e2e1;
+  font-family: var(--font-sans);
+}

@@ -1,0 +1,6 @@
+{
+  "name": "超脑信息技术服务",
+  "description": "20年遗留系统拯救专家饶荣的架构咨询服务，专治各类“祖传代码”顽疾，提供微服务解耦与数据平滑迁移诊疗。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
