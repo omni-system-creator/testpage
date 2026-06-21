@@ -55,7 +55,7 @@ export default function Header({ onOpenDiagnostic, onOpenCallback }: HeaderProps
           </a>
           <a
             className="text-sm text-on-surface-variant hover:text-white transition-colors duration-200 nav-underline font-medium"
-            href="tel:13551252357"
+            href="tel:18180622357"
           >
             联系电话
           </a>
@@ -109,12 +109,12 @@ export default function Header({ onOpenDiagnostic, onOpenCallback }: HeaderProps
               治病原理
             </a>
             <a
-              href="tel:13551252357"
+              href="tel:18180622357"
               onClick={() => setMobileMenuOpen(false)}
               className="text-on-surface-variant hover:text-gold-light text-base py-1 border-b border-white/5 flex items-center gap-1 font-medium"
             >
               <Phone size={14} className="text-primary-gold" />
-              13551252357
+              18180622357
             </a>
 
             <div className="pt-2 flex flex-col gap-2">

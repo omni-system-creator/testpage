@@ -95,7 +95,7 @@ export default function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                 <input
                   type="tel"
                   required
-                  placeholder="如：13551252357"
+                  placeholder="如：18180622357"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full px-3 py-2 bg-black border border-white/10 rounded focus:border-primary-gold focus:outline-none text-sm text-white"

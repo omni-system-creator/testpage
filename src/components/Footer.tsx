@@ -35,12 +35,12 @@ export default function Footer({ onOpenCallback }: FooterProps) {
         {/* Right Side: Contact info & terms/agreements */}
         <div className="flex flex-col items-center md:items-end gap-5">
           <a
-            href="tel:13551252357"
+            href="tel:18180622357"
             className="flex items-center gap-3 bg-[#1d1c1c] border border-white/10 hover:border-primary-gold/50 px-6 py-3.5 rounded-lg transition-all group"
           >
             <Phone className="text-primary-gold group-hover:scale-110 transition-transform duration-300" size={18} />
             <span className="font-display text-lg md:text-2xl font-bold text-white group-hover:text-primary-gold-light transition-colors select-all">
-              13551252357
+              18180622357
             </span>
           </a>
 
@@ -72,12 +72,12 @@ export default function Footer({ onOpenCallback }: FooterProps) {
 
       {/* Copyright notes */}
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 text-center text-xs text-on-surface-variant/50 font-medium">
-        <p>© 2026 超脑信息技术服务 | 豫ICP备12345678号-3</p>
+        <p>© 2026 超脑信息技术服务 | 蜀ICP备2025172911号</p>
       </div>
 
       {/* Persistent Floating FAB for Mobile Quick Dialing */}
       <a
-        href="tel:13551252357"
+        href="tel:18180622357"
         className="fixed bottom-6 right-6 w-14 h-14 bg-primary-gold text-black rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform z-30 md:hidden border border-white/20"
         aria-label="一键电话咨询"
       >
