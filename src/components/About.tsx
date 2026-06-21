@@ -4,8 +4,7 @@
  */
 
 import React from 'react';
-import { motion } from 'motion/react';
-import { CheckCircle2, User, Award, Shield } from 'lucide-react';
+import { CheckCircle2, User } from 'lucide-react';
 
 export default function About() {
   const avatarUrl =
@@ -28,7 +27,7 @@ export default function About() {
           <div className="mt-5 w-fit self-start md:ml-3 px-5 py-4 bg-primary-gold text-black rounded shadow-2xl flex items-center gap-3 transform group-hover:-translate-y-1 transition-transform">
             <span className="font-display text-3xl font-extrabold leading-none">20+</span>
             <p className="text-[10px] tracking-wider uppercase font-mono font-bold text-black/80 whitespace-nowrap leading-none">
-              Years of Architecture
+              Years of Judgment
             </p>
           </div>
         </div>
@@ -37,28 +36,26 @@ export default function About() {
         <div className="space-y-8">
           <div className="space-y-3">
             <span className="text-xs uppercase tracking-widest text-primary-gold font-mono block">
-              EXPERTISE PROFILE · 首席重构专家
+              Decision Credibility · 第三方判断依据
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white flex items-center gap-2">
               <User size={28} className="text-primary-gold" />
-              关于我
+              为什么这份判断值得信任
             </h2>
           </div>
 
           <div className="space-y-4 text-on-surface-variant text-base leading-relaxed">
             <p>
-              作为拥有
-              <span className="text-white font-bold">20年一线实战经验</span>
-              的高级软件架构师，我曾执掌与见证了多轮技术浪潮的更迭。在资本与行业疯狂“追逐新技术”的浮躁时代，我却选择扎根于那些支撑着大型企业核心命脉、却在时光洗礼下愈发笨重的
-              <strong className="text-primary-gold-light">“历史遗留系统”</strong>。
+              我做这件事的价值，不在于比别人更会写代码，而在于我看过足够多复杂系统是如何在交付、增长、并购整合和团队交接中逐步失控的。二十多年的一线经历，让我能更早识别那些藏在表面可运行背后的
+              <strong className="text-primary-gold-light">技术债、单点依赖、稳定性裂缝与接盘风险</strong>。
             </p>
             <p>
-              我深信遗留系统的生命力在于平滑而持久的演进，而不是野蛮的彻底推倒重来。我最擅长的是为复杂庞杂的主线系统开展
-              <strong className="text-white font-bold">“微创手术”</strong>
-              式的改造。在确保最关键核心业务连续不中断的前提下，精准割离不合理的耦合结构、层层驯化脏乱的烂账代码、并有序升级老化的数据网络。
+              对投资并购方来说，技术尽调最重要的不是知道系统“用了什么框架”，而是知道它到底能不能接、接下来要补多少钱、需要多长时间、会不会影响交割后的经营稳定。我擅长把这些技术问题翻译成
+              <strong className="text-white font-bold">决策层听得懂、能用于判断交易价值</strong>
+              的结论。
             </p>
             <p className="italic text-primary-gold bg-primary-gold/5 px-4 py-3 border-l-2 border-primary-gold rounded font-medium">
-              “对于企业最核心的生产数据资产，稳定压倒一切。”
+              “一份技术尽调报告的价值，不是指出代码写得差，而是提前暴露会影响估值、整合周期与后续投入的系统风险。”
             </p>
           </div>
 
@@ -66,15 +63,15 @@ export default function About() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 pt-2">
             <div className="flex items-center gap-2 text-white/90 whitespace-nowrap">
               <CheckCircle2 size={18} className="text-primary-gold flex-shrink-0" />
-              <span className="text-sm font-semibold">微服务高可靠渐进解耦</span>
+              <span className="text-sm font-semibold">识别隐藏技术债与单点风险</span>
             </div>
             <div className="flex items-center gap-1.5 text-white/90 whitespace-nowrap">
               <CheckCircle2 size={18} className="text-primary-gold flex-shrink-0" />
-              <span className="text-sm font-semibold">海量异构数据库平滑迁移</span>
+              <span className="text-sm font-semibold">预估接盘难度与整合成本</span>
             </div>
             <div className="flex items-center gap-1.5 text-white/90 whitespace-nowrap">
               <CheckCircle2 size={18} className="text-primary-gold flex-shrink-0" />
-              <span className="text-sm font-semibold">黑盒业务高防度重构测试</span>
+              <span className="text-sm font-semibold">把技术问题翻译成决策语言</span>
             </div>
           </div>
         </div>

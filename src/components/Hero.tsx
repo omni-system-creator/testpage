@@ -5,18 +5,14 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { ClipboardCheck, Sparkles, TrendingDown, ShieldAlert, ArrowDown } from 'lucide-react';
+import { Phone, Sparkles, TrendingDown, ShieldAlert, ArrowDown } from 'lucide-react';
 import { Metric } from '../types';
 
-interface HeroProps {
-  onOpenDiagnostic: () => void;
-}
-
-export default function Hero({ onOpenDiagnostic }: HeroProps) {
+export default function Hero() {
   const metrics: Metric[] = [
-    { value: '30+', label: '企业核心系统改造经验' },
-    { value: '40%', label: '平均系统维护及存储成本降幅' },
-    { value: '100%', label: '核心业务数据零泄漏、平滑安全迁移' },
+    { value: '20年', label: '复杂系统判断与遗留资产识别经验' },
+    { value: '并购前', label: '识别隐藏技术债、接盘难度与整合风险' },
+    { value: '交割后', label: '辅助评估重构预算、接盘节奏与稳定性边界' },
   ];
 
   return (
@@ -38,7 +34,7 @@ export default function Hero({ onOpenDiagnostic }: HeroProps) {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-gold"></span>
           </span>
           <span className="font-mono text-xs text-on-surface-variant font-medium tracking-widest uppercase text-balance-cjk">
-            超脑信息技术服务 · 20年架构重构沉淀
+            Superbrain Tech Due Diligence · 第三方技术尽调报告
           </span>
         </motion.div>
 
@@ -50,7 +46,7 @@ export default function Hero({ onOpenDiagnostic }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-display text-4xl md:text-7xl font-extrabold leading-tight text-white tracking-tight text-balance-cjk"
           >
-            专治各类<span className="text-primary-gold text-glow select-all">“祖传代码”</span>顽疾
+            并购前，先看清这套系统到底值不值得接
           </motion.h1>
 
           <motion.p
@@ -59,7 +55,7 @@ export default function Hero({ onOpenDiagnostic }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-base md:text-xl text-on-surface-variant font-medium tracking-wide max-w-3xl mx-auto text-balance-cjk"
           >
-            本源重构拯救专家 | 业务不停机，0事故平滑迁移 | 打通企业老旧核心生命脉搏
+            面向投资并购方的第三方技术尽调服务。在交易签约前识别代码资产质量、系统稳定性、历史技术债规模、后续重构成本与接盘风险，避免账面看起来能跑，接手后才发现底层全是隐性炸弹。
           </motion.p>
         </div>
 
@@ -70,18 +66,18 @@ export default function Hero({ onOpenDiagnostic }: HeroProps) {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <button
-            onClick={onOpenDiagnostic}
+          <a
+            href="tel:18180622357"
             className="group px-8 py-4 bg-primary-gold hover:bg-primary-gold-light text-black font-bold rounded shadow-lg transition-all transform hover:scale-[1.01] flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(212,163,115,0.4)]"
           >
-            <ClipboardCheck size={18} className="group-hover:rotate-6 transition-transform" />
-            自测系统健康报告 (获取免费体检)
-          </button>
+            <Phone size={18} className="group-hover:rotate-6 transition-transform" />
+            电话沟通技术尽调需求
+          </a>
           <a
             href="#cases"
             className="px-8 py-4 border border-primary-gold text-primary-gold hover:bg-primary-gold/10 font-bold rounded transition-all text-center flex items-center justify-center gap-2"
           >
-            查看成功案例
+            查看尽调判断案例
             <ArrowDown size={16} />
           </a>
         </motion.div>

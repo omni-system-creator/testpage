@@ -12,9 +12,10 @@ export interface CaseStudy {
   id: string;
   iconName: 'warning' | 'database' | 'cloud_upload';
   title: string;
-  description: string;
-  solution: string;
-  result: string;
+  finding: string;
+  impact: string;
+  action: string;
+  badgeLabel: string;
   badgeColor: 'error' | 'primary' | 'secondary';
 }
 

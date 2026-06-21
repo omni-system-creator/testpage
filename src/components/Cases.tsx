@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { AlertTriangle, Database, CloudLightning, ArrowRight, CheckCircle, ChevronDown, ChevronUp, Layers, HelpCircle, Activity } from 'lucide-react';
+import { AlertTriangle, Database, CloudLightning, ChevronDown, ChevronUp, Layers } from 'lucide-react';
 import { CaseStudy } from '../types';
 
 export default function Cases() {
@@ -15,63 +15,65 @@ export default function Cases() {
     {
       id: 'case-1',
       iconName: 'warning',
-      title: '痛点：泥潭系统',
-      description: '某金融平台10年历史核心系统。底层代码总量200万行，缺乏任何原班文档支撑，发布部署甚至需要全行断网停机4小时。代码环绕极其重叠，团队缺乏在不中断线上账务的前提下进行重写和更改的勇气。',
-      solution: '绞杀者模式 (Strangler Fig Pattern) 分层解耦',
-      result: '在原先凌乱的老代码外围增设「防腐防护网（Anti-Corruption Area）」，使用网关路由拦截外部分流，并将老系统以毫秒级的粒度切割至新开发的微服务中。最终实现0停机全透明滚动升级发布，发布停摆由原来的4小时缩短至10分钟。',
+      title: '并购前发现核心账务系统高度耦合，后续重构成本远超预期',
+      finding: '目标公司核心账务系统运行多年但缺少清晰边界，发布仍依赖停机窗口，关键知识被少数老员工掌握。',
+      impact: '如果按原估值完成交易，收购方在交割后将承担额外的重构预算，并面临核心业务连续性与人员交接风险。',
+      action: '建议在交易条款中增加技术整合成本预留，并将账务主链路纳入交割后优先隔离计划。',
+      badgeLabel: '高耦合账务系统',
       badgeColor: 'error',
     },
     {
       id: 'case-2',
       iconName: 'database',
-      title: '痛点：数据孤岛',
-      description: '某知名传统重工集团。旗下运作着30多个分散在全国各地的冷门异构数据库。日常由于网络抖动和底层契约差异，各中心数据迟迟不能对账整合。对账时间延迟多达24小时，管理层根本无法得知实时的成品进出存损状况。',
-      solution: '异构归并 · 统一湖仓架构集成治理',
-      result: '架设轻量级主从同步路由，对全国分散的库表通过高可用管道流对账合并。重构表结构事务并解决对齐冲突，使得资金流对账由原来的24小时直降为秒级对口，全线系统运维所需的人力消耗直降60%。',
+      title: '目标公司数据架构分裂，交割后整合风险被严重低估',
+      finding: '多个地区库表标准不一，异构数据库长期并存，数据对账依赖人工补单与本地经验，管理层看不到真实的数据一致性成本。',
+      impact: '并购后若直接推进集团级整合，将快速暴露数据冲突、对账延迟与跨团队协同成本，影响经营看板可信度。',
+      action: '建议在交易前完成数据资产分层盘点，并将统一口径与同步链路建设列为整合预算的独立项目。',
+      badgeLabel: '数据整合风险',
       badgeColor: 'primary',
     },
     {
       id: 'case-3',
       iconName: 'cloud_upload',
-      title: '痛点：架构失速',
-      description: '头部综合电商平台。在节假大促等重大高并发节点期间，其核心系统的 CPU 占用率常态化暴涨至 100%，数据库发生大规模互锁闪退，原有单体老化架构无力承载陡增的消费支付流。',
-      solution: '弹性云原生容器集群化改造与热路分离',
-      result: '将高频只读与支付热路径进行「断骨式」降级切分。重写慢sql并设立高并发队列哨兵，将系统全线上云容器化弹性应对。完工后支撑了10倍于平日峰值的高压流量洗脑式冲淋，年化可用性达到了极高的 99.99%。',
+      title: '业务仍在增长，但底层架构已影响持续经营稳定性',
+      finding: '高并发期间 CPU 与数据库锁冲突集中爆发，现有单体架构无法支撑业务峰值，核心支付路径缺少弹性冗余。',
+      impact: '如果收购后继续按原业务规划扩张，平台将在高峰节点持续暴露可用性风险，拖累营收兑现与品牌信任。',
+      action: '建议在估值与整合方案中纳入容量治理与热点链路改造成本，并设定交割后首阶段稳定性提升目标。',
+      badgeLabel: '持续经营风险',
       badgeColor: 'secondary',
     },
   ];
 
-  // Specific procedural details for expanded analytics
-  const processDetails: Record<string, { steps: string[]; techStack: string[]; difficulty: string }> = {
+  const processDetails: Record<string, { riskLevel: string; reviewFocus: string[]; recommendation: string; timing: string }> = {
     'case-1': {
-      difficulty: '不许中断核心全行对公支付结算流，如同「在时速120公里的卡车上更换引擎」。',
-      steps: [
-        '第一步：外围部署反向路由，对账务流加装旁路监听。',
-        '第二步：在历史泥潭外布设防腐层契约，隔离新老服务实体。',
-        '第三步：利用绞杀者（Strangler Pattern）分步剥离核心余额模块。',
-        '第四步：实施老数据库到新微服务集群数据流的秒级双写并联。',
+      riskLevel: '高风险：影响交割后核心业务连续性与知识交接。',
+      reviewFocus: [
+        '核查发布是否依赖停机、人工脚本或口口相传的隐性流程。',
+        '梳理账务主链路的耦合边界，判断是否存在无法拆分的核心单点。',
+        '确认关键岗位是否存在单人掌控核心知识的组织锁定风险。',
       ],
-      techStack: ['Spring Boot 3', 'K8s Service Mesh', 'Apache APISIX', 'MySQL Binlog Sync'],
+      recommendation: '建议在交易条款中预留重构预算，并要求卖方配合完成关键系统交接清单与过渡期支持。',
+      timing: '适合在 LOI 后、交割前的技术深度核查阶段开展。',
     },
     'case-2': {
-      difficulty: '30多个库包含Oracle/SQL Server/PostgreSQL/以及历史私有库，表字段标准杂乱，网络丢包严重。',
-      steps: [
-        '第一步：基于变更捕获（CDC）和自定义映射引擎，清洗离群表。',
-        '第二步：采用湖仓一体化方案进行宽表聚合，减少嵌套链路。',
-        '第三步：对主干库表增加分布式时间戳对齐，平滑解决分布式死锁。',
-        '第四步：设计高容灾离线队列，处理远程数据库网络闪退的重连补单。',
+      riskLevel: '中高风险：影响整合效率、经营分析口径与协同成本。',
+      reviewFocus: [
+        '确认历史库表、同步方式与地区系统之间是否存在隐含口径冲突。',
+        '判断数据资产是否具备统一清洗与整合的现实基础。',
+        '评估整合后对管理报表、财务对账与供应链协同的影响范围。',
       ],
-      techStack: ['Apache Flink', 'StarRocks', 'CDC Connectors', 'Redis Sentinel'],
+      recommendation: '建议在交易完成前先定义数据资产主线与过渡策略，避免交割后因口径不一拖慢整合。',
+      timing: '适合在尽调中后段，与业务、财务与技术负责人联合评审。',
     },
     'case-3': {
-      difficulty: '大促销期间单点扣减逻辑发生深层互锁，写冲突导致线程池大量爆满溢出。',
-      steps: [
-        '第一步：核心抢购路径实行无状态削峰及防抖降级设计。',
-        '第二步：单体数据库读写合并表进行细粒度拆分，实施秒级只读同步。',
-        '第三步：对热点SQL全面消除嵌套JOIN，改为高速缓存旁路查表。',
-        '第四步：引入熔断隔离阻尼器，确保底层数据库锁表不向上传递拖垮网关。',
+      riskLevel: '高风险：影响业务扩张、峰值收入兑现与品牌稳定性。',
+      reviewFocus: [
+        '识别峰值场景下的热点链路与数据库锁冲突来源。',
+        '评估现有架构是否还能支撑未来业务规划与营销节点。',
+        '测算容量治理、弹性改造与故障隔离的必要投入区间。',
       ],
-      techStack: ['Go GIN 微内核', 'Redis Single-Thread Lock', 'Docker Swarm', 'Sentinel Flow Control'],
+      recommendation: '建议在估值模型中计入平台稳定性补课成本，并将核心高峰链路纳入交割后首阶段整治计划。',
+      timing: '适合在增长预期较高的收购项目中，作为估值折价与整合节奏判断依据。',
     },
   };
 
@@ -79,13 +81,13 @@ export default function Cases() {
     <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto" id="cases">
       <div className="text-center space-y-4 mb-16">
         <span className="text-xs font-mono uppercase tracking-widest text-[#9bcbff]">
-          SITUATIONAL CRISIS SAVIOR · 实战战绩
+          Due Diligence Cases · 决策判断样本
         </span>
         <h2 className="font-display text-3xl md:text-5xl font-extrabold text-white tracking-tight">
-          典型险情处理
+          我关注的不是系统写得漂不漂亮，而是它会不会在你接手后吞掉预算、时间和团队
         </h2>
         <p className="text-base md:text-lg text-on-surface-variant max-w-2xl mx-auto font-medium">
-          老重构如生死时速，每一次精准的改动都是在最混乱的系统中重新裁出秩序。
+          每个案例都围绕交易前后最关键的判断问题展开：隐藏风险在哪里、会影响什么、应该如何进入决策动作。
         </p>
       </div>
 
@@ -130,30 +132,30 @@ export default function Cases() {
                         : 'border-[#9bcbff]/10 bg-[#9bcbff]/5 text-[#9bcbff]'
                     }`}
                   >
-                    {cs.badgeColor === 'error' ? '危重系统' : cs.badgeColor === 'primary' ? '数据混乱' : '架构失效'}
+                    {cs.badgeLabel}
                   </span>
                 </div>
 
                 {/* Project Title & Short Description */}
                 <div className="space-y-3">
-                  <h3 className="text-xl font-bold text-white font-display">{cs.title}</h3>
+                  <h3 className="text-xl font-bold text-white font-display text-balance-cjk">{cs.title}</h3>
                   <p className="text-sm text-on-surface-variant leading-relaxed line-clamp-4 hover:line-clamp-none transition-all duration-300">
-                    {cs.description}
+                    {cs.finding}
                   </p>
                 </div>
 
                 <div className="py-4 border-t border-white/5 space-y-4">
                   <div>
                     <span className="text-[10px] font-mono tracking-widest uppercase text-primary-gold block mb-1">
-                      首要解法
+                      业务影响
                     </span>
-                    <p className="text-sm font-semibold text-white">{cs.solution}</p>
+                    <p className="text-sm font-semibold text-white text-balance-cjk">{cs.impact}</p>
                   </div>
                   <div>
                     <span className="text-[10px] font-mono tracking-widest uppercase text-accent-blue block mb-1">
-                      拯救结果
+                      建议动作
                     </span>
-                    <p className="text-sm text-on-surface-variant leading-relaxed">{cs.result}</p>
+                    <p className="text-sm text-on-surface-variant leading-relaxed text-balance-cjk">{cs.action}</p>
                   </div>
                 </div>
               </div>
@@ -166,7 +168,7 @@ export default function Cases() {
                 >
                   <span className="flex items-center gap-1">
                     <Layers size={12} />
-                    {isActive ? '收起深度病理剖析' : '见证手术细节 (查看实操步骤)'}
+                    {isActive ? '收起尽调结论' : '展开查看尽调重点'}
                   </span>
                   {isActive ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                 </button>
@@ -182,20 +184,20 @@ export default function Cases() {
                     >
                       <div className="space-y-1">
                         <span className="text-[10px] uppercase font-mono tracking-widest text-red-400 block font-bold">
-                          最大攻关难点 (Hardest Part)
+                          风险等级
                         </span>
-                        <p className="text-[#e2e2e2] leading-relaxed italic pr-2">{detail.difficulty}</p>
+                        <p className="text-[#e2e2e2] leading-relaxed italic pr-2 text-balance-cjk">{detail.riskLevel}</p>
                       </div>
 
                       <div className="space-y-2">
                         <span className="text-[10px] uppercase font-mono tracking-widest text-[#9bcbff] block font-bold">
-                          重构实施阶段
+                          尽调重点
                         </span>
                         <div className="space-y-1.5 pl-1">
-                          {detail.steps.map((st, i) => (
+                          {detail.reviewFocus.map((st, i) => (
                             <div key={i} className="flex gap-2 text-on-surface-variant leading-normal">
-                              <span className="text-primary-gold font-bold">{i+1}.</span>
-                              <span>{st}</span>
+                              <span className="text-primary-gold font-bold">{i + 1}.</span>
+                              <span className="text-balance-cjk">{st}</span>
                             </div>
                           ))}
                         </div>
@@ -203,18 +205,16 @@ export default function Cases() {
 
                       <div className="space-y-1">
                         <span className="text-[10px] uppercase font-mono tracking-widest text-[#d1d1d1] block font-bold">
-                          实战技术栈
+                          建议结论
                         </span>
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {detail.techStack.map((tech, i) => (
-                            <span
-                              key={i}
-                              className="px-2 py-0.5 rounded bg-white/5 border border-white/5 text-[10px] text-white/80 font-mono"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
+                        <p className="text-on-surface-variant leading-relaxed text-balance-cjk">{detail.recommendation}</p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <span className="text-[10px] uppercase font-mono tracking-widest text-primary-gold block font-bold">
+                          适用阶段
+                        </span>
+                        <p className="text-on-surface-variant leading-relaxed text-balance-cjk">{detail.timing}</p>
                       </div>
                     </motion.div>
                   )}
