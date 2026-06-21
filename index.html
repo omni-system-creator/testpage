@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>测试网站</title>
+  <style>
+    /* 页面基础样式 */
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --subtle: #6b7280;
+      --primary: #2563eb;
+      --primary-soft: #dbeafe;
+      --border: #e5e7eb;
+      --shadow: 0 20px 45px rgba(37, 99, 235, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, #dbeafe 0, transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(760px, 100%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px;
+      box-shadow: var(--shadow);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 20px 0 16px;
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--subtle);
+    }
+
+    .panel {
+      margin-top: 28px;
+      padding: 20px 22px;
+      border-radius: 18px;
+      background: #f9fbff;
+      border: 1px dashed #bfdbfe;
+    }
+
+    .meta {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .item {
+      padding: 18px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .item strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--subtle);
+    }
+
+    .item span {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 28px 20px;
+        border-radius: 18px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="badge">BytePlus Pages 测试站点</div>
+    <h1>部署链路已经打通</h1>
+    <p>这是一个用于验证静态网站发布流程的测试页面。只要完成 BytePlus 账号和 AK/SK 配置，就可以把这个页面正式部署到线上。</p>
+
+    <section class="panel">
+      <p>如果你现在能看到这段内容，说明测试站点文件已经准备完成，下一步只需要完成 BytePlus 控制台侧的授权与开通。</p>
+    </section>
+
+    <section class="meta">
+      <div class="item">
+        <strong>站点类型</strong>
+        <span>纯静态 HTML</span>
+      </div>
+      <div class="item">
+        <strong>部署目标</strong>
+        <span>BytePlus Edge Pages</span>
+      </div>
+      <div class="item">
+        <strong>当前状态</strong>
+        <span>等待账号配置</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
