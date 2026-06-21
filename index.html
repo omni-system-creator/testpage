@@ -5,34 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>静态网页发布服务</title>
   <style>
-    /* 全局颜色和阴影变量 */
+    /* 页面主题变量 */
     :root {
-      color-scheme: light;
-      --bg: #081120;
-      --bg-soft: #101b31;
-      --panel: rgba(10, 18, 32, 0.78);
-      --panel-strong: rgba(14, 25, 46, 0.96);
-      --line: rgba(148, 163, 184, 0.2);
-      --text: #e5eefc;
-      --subtle: #9fb0cc;
-      --primary: #60a5fa;
-      --primary-strong: #2563eb;
-      --success: #34d399;
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      color-scheme: dark;
+      --bg: #040814;
+      --bg-soft: #081125;
+      --surface: rgba(10, 18, 38, 0.76);
+      --surface-strong: rgba(8, 15, 32, 0.92);
+      --text: #eef4ff;
+      --muted: #96a8cb;
+      --line: rgba(105, 146, 255, 0.22);
+      --accent: #4b7cff;
+      --accent-soft: rgba(75, 124, 255, 0.12);
+      --radius: 24px;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
+      min-height: 100dvh;
+      overflow-x: hidden;
       font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.35), transparent 30%),
-        radial-gradient(circle at right center, rgba(52, 211, 153, 0.18), transparent 24%),
-        linear-gradient(180deg, #07101d 0%, #0a1426 45%, #081120 100%);
+        radial-gradient(circle at 10% 10%, rgba(75, 124, 255, 0.22), transparent 25%),
+        radial-gradient(circle at 88% 18%, rgba(75, 124, 255, 0.14), transparent 18%),
+        linear-gradient(180deg, #040814 0%, #050c1d 36%, #030711 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at center, black 52%, transparent 96%);
+      pointer-events: none;
+      opacity: 0.42;
+      z-index: 0;
     }
 
     a {
@@ -40,425 +60,854 @@
       text-decoration: none;
     }
 
-    .page {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 24px 0 48px;
+    img {
+      display: block;
+      width: 100%;
     }
 
-    .nav {
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1280px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 18px 0 48px;
+    }
+
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 18px 22px;
+      min-height: 72px;
+      padding: 16px 20px;
       border: 1px solid var(--line);
-      border-radius: 20px;
-      background: rgba(8, 17, 32, 0.65);
-      backdrop-filter: blur(18px);
+      border-radius: var(--radius);
+      background: rgba(4, 8, 20, 0.72);
+      backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      gap: 14px;
     }
 
     .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--primary-strong), var(--success));
-      color: #fff;
-      font-size: 16px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent),
+        linear-gradient(135deg, #173574, var(--accent));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-weight: 800;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
-    .nav-links {
+    .brand-copy strong,
+    .brand-copy span {
+      display: block;
+    }
+
+    .brand-copy strong {
+      font-size: 15px;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-copy span {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav {
       display: flex;
-      gap: 18px;
-      color: var(--subtle);
-      font-size: 14px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 24px;
-      margin-top: 24px;
-    }
-
-    .hero-card,
-    .side-card,
-    .section,
-    .footer {
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: var(--panel);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      padding: 56px;
-    }
-
-    .badge {
-      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(96, 165, 250, 0.14);
-      border: 1px solid rgba(96, 165, 250, 0.22);
-      color: #bfdbfe;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    h1 {
-      margin: 22px 0 18px;
-      font-size: clamp(36px, 5vw, 64px);
-      line-height: 1.06;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-desc {
-      max-width: 680px;
-      font-size: 18px;
-      line-height: 1.85;
-      color: var(--subtle);
-    }
-
-    .cta-row {
-      display: flex;
+      gap: 18px;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 30px;
+      font-size: 13px;
+      color: var(--muted);
     }
 
-    .btn {
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 50px;
-      padding: 0 22px;
-      border-radius: 14px;
-      font-size: 15px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 14px;
       font-weight: 700;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      white-space: nowrap;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      opacity: 0.95;
+    .button:hover {
+      transform: translateY(-2px);
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      color: #fff;
+    .button-primary {
+      background: linear-gradient(135deg, #2d57ff, #4b7cff);
+      color: #ffffff;
+      box-shadow: 0 16px 40px rgba(75, 124, 255, 0.32);
     }
 
-    .btn-secondary {
-      border: 1px solid rgba(148, 163, 184, 0.26);
-      background: rgba(15, 23, 42, 0.45);
-      color: #dbeafe;
+    .button-secondary {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      color: #dfe8ff;
     }
 
-    .trust-list {
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-visual,
+    .marquee,
+    .panel,
+    .service-showcase,
+    .contact-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      min-height: 620px;
+      padding: 34px 34px 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(75, 124, 255, 0.26);
+      color: #c7d8ff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(75, 124, 255, 0.9);
+    }
+
+    .headline-wrap {
+      position: relative;
+      margin-top: 26px;
+    }
+
+    .outline-word {
+      position: absolute;
+      top: -58px;
+      left: 18%;
+      font-size: clamp(92px, 18vw, 228px);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(148, 180, 255, 0.12);
+      text-transform: uppercase;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 8.5em;
+      margin: 0;
+      font-size: clamp(44px, 7vw, 92px);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    h1 .ghost {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(223, 234, 255, 0.86);
+    }
+
+    .hero-desc {
+      position: relative;
+      z-index: 1;
+      max-width: 29em;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 28px;
-      padding: 0;
-      list-style: none;
-      color: #d6e3f8;
     }
 
-    .trust-list li {
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      background: rgba(15, 23, 42, 0.45);
-      font-size: 14px;
-    }
-
-    .side-card {
-      padding: 28px;
-      background: var(--panel-strong);
-    }
-
-    .stat-grid {
+    .tag-field {
       display: grid;
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
     }
 
-    .stat-item {
-      padding: 20px;
-      border-radius: 20px;
+    .tag-item {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(111, 145, 242, 0.18);
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(148, 163, 184, 0.12);
     }
 
-    .stat-item strong {
+    .tag-item strong {
       display: block;
-      margin-bottom: 10px;
-      color: var(--subtle);
+      margin-bottom: 8px;
+      color: #dfe8ff;
+      font-size: 15px;
+    }
+
+    .tag-item span {
+      color: var(--muted);
       font-size: 13px;
-      font-weight: 600;
+      line-height: 1.7;
     }
 
-    .stat-item span {
-      display: block;
-      font-size: 28px;
-      font-weight: 800;
-      line-height: 1.2;
+    .hero-visual {
+      min-height: 620px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(11, 21, 46, 0.94), rgba(8, 14, 28, 0.96));
     }
 
-    .section {
-      margin-top: 24px;
-      padding: 34px;
+    .visual-frame {
+      position: relative;
+      height: 100%;
+      border-radius: calc(var(--radius) - 6px);
+      overflow: hidden;
+      border: 1px solid rgba(133, 165, 255, 0.16);
+      background: #020511;
     }
 
-    .section-title {
-      margin: 0 0 10px;
-      font-size: 28px;
+    .visual-frame img {
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      animation: drift 12s ease-in-out infinite;
     }
 
-    .section-desc {
-      margin: 0;
-      color: var(--subtle);
-      font-size: 16px;
-      line-height: 1.8;
+    .visual-frame::before,
+    .visual-frame::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      border-radius: 999px;
+      background: rgba(5, 10, 20, 0.82);
+      border: 1px solid rgba(120, 154, 255, 0.18);
+      backdrop-filter: blur(12px);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 24px;
+    .visual-frame::before {
+      width: 210px;
+      height: 54px;
+      top: 18px;
+      right: 18px;
+      transform: rotate(-9deg);
     }
 
-    .feature,
-    .step,
-    .case {
-      padding: 24px;
-      border-radius: 22px;
-      border: 1px solid rgba(148, 163, 184, 0.12);
-      background: rgba(255, 255, 255, 0.03);
+    .visual-frame::after {
+      width: 180px;
+      height: 180px;
+      bottom: -24px;
+      left: -30px;
+      transform: rotate(18deg);
     }
 
-    .feature h3,
-    .step h3,
-    .case h3 {
-      margin: 0 0 12px;
-      font-size: 20px;
-    }
-
-    .feature p,
-    .step p,
-    .case p {
-      margin: 0;
-      color: var(--subtle);
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    .step-index {
-      width: 34px;
-      height: 34px;
-      margin-bottom: 14px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: rgba(96, 165, 250, 0.16);
-      color: #bfdbfe;
-      font-size: 15px;
+    .visual-label {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      right: 32px;
+      top: 34px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(5, 11, 23, 0.8);
+      border: 1px solid rgba(119, 154, 255, 0.24);
+      font-size: 13px;
       font-weight: 700;
     }
 
-    .footer {
-      margin-top: 24px;
-      padding: 28px 34px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+    .visual-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(75, 124, 255, 0.85);
     }
 
-    .footer p {
+    .visual-note {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      z-index: 3;
+      max-width: 240px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(5, 11, 23, 0.78);
+      border: 1px solid rgba(119, 154, 255, 0.18);
+    }
+
+    .visual-note strong,
+    .visual-note span {
+      display: block;
+    }
+
+    .visual-note strong {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .visual-note span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .marquee {
+      margin-top: 18px;
+      padding: 12px 0;
+      background: rgba(7, 14, 30, 0.86);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 26px;
+      min-width: max-content;
+      padding-left: 26px;
+      animation: marquee 24s linear infinite;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 13px;
+      color: #dce7ff;
+      white-space: nowrap;
+    }
+
+    .marquee-track span {
+      opacity: 0.96;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      padding: 28px;
+      min-height: 100%;
+    }
+
+    .panel h2,
+    .service-showcase h2,
+    .contact-card h2 {
       margin: 0;
-      color: var(--subtle);
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .panel p,
+    .service-showcase p,
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 15px;
+    }
+
+    .number-stack {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .number-row {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(112, 147, 255, 0.14);
+    }
+
+    .number-row strong {
+      font-size: 28px;
+      color: #cfe0ff;
+      line-height: 1;
+    }
+
+    .number-row span {
+      color: var(--muted);
+      font-size: 14px;
       line-height: 1.8;
     }
 
-    @media (max-width: 960px) {
-      .hero,
-      .grid {
-        grid-template-columns: 1fr;
-      }
+    .service-showcase {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 0;
+      min-height: 520px;
+    }
 
-      .hero-card,
-      .section,
-      .footer {
-        padding: 28px 22px;
+    .showcase-image {
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+    }
+
+    .showcase-image img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .showcase-image::after {
+      content: "";
+      position: absolute;
+      inset: auto 24px 24px auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent),
+        rgba(3, 8, 20, 0.42);
+      backdrop-filter: blur(16px);
+      transform: rotate(13deg);
+    }
+
+    .showcase-copy {
+      position: relative;
+      padding: 34px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(8, 15, 32, 0.98), rgba(5, 11, 24, 0.98));
+    }
+
+    .showcase-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .showcase-item {
+      padding: 18px 18px 18px 20px;
+      border-left: 2px solid var(--accent);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 18px;
+    }
+
+    .showcase-item strong,
+    .showcase-item span {
+      display: block;
+    }
+
+    .showcase-item strong {
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #e8efff;
+    }
+
+    .showcase-item span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .strip-layout {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .contact-card {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .contact-card ul {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-card li {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(112, 147, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .contact-card li strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #e7efff;
+      font-size: 15px;
+    }
+
+    .quote-wall {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .quote {
+      padding: 24px;
+      border: 1px solid rgba(112, 147, 255, 0.14);
+      border-radius: var(--radius);
+      background: rgba(8, 15, 32, 0.82);
+      box-shadow: var(--shadow);
+    }
+
+    .quote strong {
+      display: block;
+      margin-bottom: 12px;
+      color: #dce8ff;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .quote p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 18px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(4, 8, 20, 0.86);
+      box-shadow: var(--shadow);
+    }
+
+    .footer small {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
       }
     }
 
-    @media (max-width: 640px) {
-      .page {
-        width: min(100% - 20px, 1180px);
-        padding-top: 12px;
+    @keyframes drift {
+      0%,
+      100% {
+        transform: scale(1.04) translate3d(0, 0, 0);
+      }
+      50% {
+        transform: scale(1.08) translate3d(-10px, -10px, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track,
+      .visual-frame img {
+        animation: none;
       }
 
-      .nav,
+      .button:hover {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .content-grid,
+      .strip-layout,
+      .service-showcase,
+      .quote-wall {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .showcase-image {
+        min-height: auto;
+      }
+
+      .showcase-image {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(100% - 16px, 1280px);
+      }
+
+      .topbar,
       .footer {
         flex-direction: column;
         align-items: flex-start;
       }
 
-      .nav-links {
-        flex-wrap: wrap;
+      .hero-copy,
+      .panel,
+      .showcase-copy,
+      .contact-card {
+        padding: 22px 18px;
+      }
+
+      .tag-field,
+      .quote-wall {
+        grid-template-columns: 1fr;
+      }
+
+      .number-row {
+        grid-template-columns: 1fr;
       }
 
       h1 {
-        font-size: 38px;
+        font-size: 46px;
       }
 
-      .hero-desc,
-      .section-desc,
-      .footer p {
-        font-size: 15px;
+      .outline-word {
+        left: 0;
+        top: -22px;
+        font-size: 98px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="nav">
+  <div class="shell">
+    <header class="topbar">
       <div class="brand">
         <div class="brand-mark">发</div>
-        <span>静态网页发布服务</span>
+        <div class="brand-copy">
+          <strong>STATIC WEB SHIP</strong>
+          <span>把静态网页变成可访问的线上门面</span>
+        </div>
       </div>
-      <nav class="nav-links">
-        <a href="#service">服务内容</a>
-        <a href="#process">合作流程</a>
-        <a href="#cases">适用场景</a>
+      <nav class="nav">
+        <a href="#capability">可做内容</a>
+        <a href="#scene">适用场景</a>
+        <a href="#contact">联系发布</a>
       </nav>
     </header>
 
     <section class="hero">
-      <div class="hero-card">
-        <div class="badge">可帮你发布静态网页 · 宣传页 · 展示页 · 活动页</div>
-        <h1>我们可以帮你把静态网页快速发布上线</h1>
+      <div class="hero-copy">
+        <div class="eyebrow">静态网页 · 宣传页 · 展示页 · 活动页</div>
+        <div class="headline-wrap">
+          <div class="outline-word">SHIP</div>
+          <h1>
+            <span>MAKE</span>
+            <span class="ghost">YOUR PAGE</span>
+            <span>GO LIVE</span>
+          </h1>
+        </div>
         <p class="hero-desc">
-          无论你是做企业展示、产品介绍、活动宣传，还是个人作品集、临时落地页，我们都可以帮你把静态网页整理、部署、发布到线上，让页面尽快可访问、可分享、可交付。
+          我们可以帮你把静态网页整理、包装、发布到线上，让原本只躺在文件夹里的页面，变成可以直接发给客户、团队和合作方的正式入口。
         </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="mailto:hello@example.com">立即咨询发布</a>
-          <a class="btn btn-secondary" href="#process">查看合作流程</a>
+        <div class="hero-actions">
+          <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
+          <a class="button button-secondary" href="#capability">查看服务</a>
         </div>
-        <ul class="trust-list">
-          <li>支持 HTML 静态站</li>
-          <li>支持 GitHub Pages 发布</li>
-          <li>适合展示页与宣传页</li>
-          <li>上线速度快</li>
+        <div class="tag-field">
+          <div class="tag-item">
+            <strong>适合快上线</strong>
+            <span>有页面、有想法、要尽快拿出一个能访问的链接，就很适合直接推进。</span>
+          </div>
+          <div class="tag-item">
+            <strong>适合做宣传</strong>
+            <span>企业介绍、产品页、作品集、活动页、招募页，都能整理成正式展示页面。</span>
+          </div>
+          <div class="tag-item">
+            <strong>交付更直接</strong>
+            <span>不是只给源文件，而是给你真正可打开、可传播、可继续迭代的线上页面。</span>
+          </div>
+          <div class="tag-item">
+            <strong>页面气质可调</strong>
+            <span>可以极简，也可以像现在这样偏实验、偏炫酷、偏视觉冲击。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-frame">
+          <img src="./assets/hero-portal.jpg" alt="抽象的蓝色发布通道视觉图" />
+          <div class="visual-label">静态网页上线视觉</div>
+          <div class="visual-note">
+            <strong>从页面到入口</strong>
+            <span>把一张静态网页，变成真正可以对外展示和分享的线上地址。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="服务说明滚动条">
+      <div class="marquee-track">
+        <span>静态网页发布</span>
+        <span>品牌宣传页上线</span>
+        <span>活动落地页交付</span>
+        <span>项目展示页整理</span>
+        <span>静态网页发布</span>
+        <span>品牌宣传页上线</span>
+        <span>活动落地页交付</span>
+        <span>项目展示页整理</span>
+      </div>
+    </section>
+
+    <section class="content-grid" id="capability">
+      <article class="panel">
+        <h2>我们做的，不只是把文件传上去</h2>
+        <p style="margin-top: 18px;">
+          更重要的是把你现在手里的网页内容整理成一个更能对外展示的版本，让访问者一打开就知道你是谁、你能做什么、下一步该怎么联系你。
+        </p>
+        <div class="number-stack">
+          <div class="number-row">
+            <strong>01</strong>
+            <span>把已有静态页面整理成更适合发布的版本，避免页面只是像一个测试稿。</span>
+          </div>
+          <div class="number-row">
+            <strong>02</strong>
+            <span>根据业务定位调整首页内容，让它更像一个能用来接客户和展示服务的入口。</span>
+          </div>
+          <div class="number-row">
+            <strong>03</strong>
+            <span>完成部署、更新和交付，让你拿到的是线上页面，不是还要自己折腾的半成品。</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-showcase">
+        <div class="showcase-image">
+          <img src="./assets/service-grid.jpg" alt="蓝色科技感的网页模块展示图" />
+        </div>
+        <div class="showcase-copy">
+          <div>
+            <h2>能做成什么样，看定位</h2>
+            <p style="margin-top: 16px;">
+              如果你想要的不是普通模板感页面，而是更有记忆点的展示方式，我们也可以把网站做得更有造型、更有视觉冲击。
+            </p>
+            <div class="showcase-list">
+              <div class="showcase-item">
+                <strong>宣传型首页</strong>
+                <span>重点是先抓眼球，再清楚讲业务，让访问者留下印象。</span>
+              </div>
+              <div class="showcase-item">
+                <strong>产品型落地页</strong>
+                <span>适合展示功能、服务、卖点和联系入口，让页面承担转化作用。</span>
+              </div>
+              <div class="showcase-item">
+                <strong>专题型展示页</strong>
+                <span>适合活动、提案、案例、作品和短期项目，用一个链接快速传播。</span>
+              </div>
+            </div>
+          </div>
+          <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="strip-layout" id="scene">
+      <article class="contact-card" id="contact">
+        <h2>你给内容，我们来把它推上线</h2>
+        <p>
+          如果你现在已经有网页文件、草稿、文案，或者只是有一个想要尽快发出去的展示需求，都可以直接往这个方向推进。
+        </p>
+        <ul>
+          <li>
+            <strong>企业介绍</strong>
+            用于展示公司、团队、服务、合作方式，适合商务介绍和品牌曝光。
+          </li>
+          <li>
+            <strong>产品页面</strong>
+            用于展示功能、方案和价值点，适合产品说明和业务承接。
+          </li>
+          <li>
+            <strong>活动专题</strong>
+            用于活动传播、报名招募、临时专题宣传，重在上线快和传播方便。
+          </li>
         </ul>
-      </div>
+        <a class="button button-primary" href="mailto:hello@example.com">联系发布</a>
+      </article>
 
-      <aside class="side-card">
-        <div class="stat-grid">
-          <div class="stat-item">
-            <strong>可承接内容</strong>
-            <span>静态网页发布</span>
-          </div>
-          <div class="stat-item">
-            <strong>适合项目</strong>
-            <span>宣传页 / 官网页 / 活动页</span>
-          </div>
-          <div class="stat-item">
-            <strong>交付重点</strong>
-            <span>快速上线与稳定访问</span>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <section class="section" id="service">
-      <h2 class="section-title">服务内容</h2>
-      <p class="section-desc">
-        我们可以围绕静态网页发布这一类业务，提供从页面整理到线上发布的一整套支持，适合需要快速出结果、快速给客户或团队展示的场景。
-      </p>
-      <div class="grid">
-        <article class="feature">
-          <h3>静态网页上线</h3>
-          <p>帮你把已有的静态页面整理成可上线版本，处理基础结构、首页入口和发布所需文件，方便直接部署。</p>
+      <div class="quote-wall">
+        <article class="quote">
+          <strong>不想让页面只停在本地</strong>
+          <p>很多网页其实已经能看了，只差最后一步整理和发布。这个环节补上，页面才真正能开始工作。</p>
         </article>
-        <article class="feature">
-          <h3>宣传页落地</h3>
-          <p>适合业务介绍、产品说明、服务宣传、活动报名等页面，把核心信息更清晰地呈现出来。</p>
+        <article class="quote">
+          <strong>不想看起来像测试稿</strong>
+          <p>上线不只是访问成功，更是让页面的呈现方式、信息顺序和视觉气质看起来更像正式作品。</p>
         </article>
-        <article class="feature">
-          <h3>发布与交付</h3>
-          <p>帮助你把页面发布到线上，生成可访问链接，方便发给客户、同事或合作方查看和验收。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="process">
-      <h2 class="section-title">合作流程</h2>
-      <p class="section-desc">
-        整个过程尽量保持简单，核心目标是让页面尽快上线，而不是把流程做复杂。
-      </p>
-      <div class="grid">
-        <article class="step">
-          <div class="step-index">01</div>
-          <h3>确认页面内容</h3>
-          <p>你提供现有网页文件、文案、品牌信息或业务需求，我们先明确页面要展示什么内容。</p>
-        </article>
-        <article class="step">
-          <div class="step-index">02</div>
-          <h3>整理上线版本</h3>
-          <p>根据发布平台要求整理静态资源、入口文件和展示结构，确保页面可正常访问。</p>
-        </article>
-        <article class="step">
-          <div class="step-index">03</div>
-          <h3>发布并交付链接</h3>
-          <p>完成部署后，把线上地址交给你，后续如果要改字、换图、继续迭代，也能接着维护。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="cases">
-      <h2 class="section-title">适用场景</h2>
-      <p class="section-desc">
-        如果你现在有“页面已经有了，但还没上线”或者“需要一个能直接发出去的宣传链接”的需求，这类场景都很适合。
-      </p>
-      <div class="grid">
-        <article class="case">
-          <h3>企业宣传页</h3>
-          <p>用于对外介绍公司、团队、服务能力、案例内容，适合商务沟通和客户初步了解。</p>
-        </article>
-        <article class="case">
-          <h3>产品展示页</h3>
-          <p>用于展示产品亮点、核心功能、价格方案、联系方式，让用户更快理解你的业务。</p>
-        </article>
-        <article class="case">
-          <h3>活动与专题页</h3>
-          <p>适合临时活动、专题介绍、招募页面等，重点是上线快、传播方便、修改成本低。</p>
+        <article class="quote">
+          <strong>想直接拿链接去展示</strong>
+          <p>无论是发给客户、同事、投资人还是合作方，一个能直接打开的页面，表达效率会高很多。</p>
         </article>
       </div>
     </section>
 
     <footer class="footer">
-      <p>
-        如果你需要的是“帮我把静态网页做出来并发布到线上”，这类业务我们可以直接支持。你给内容，我们来帮你整理、发布、交付。
-      </p>
-      <a class="btn btn-primary" href="mailto:hello@example.com">联系发布</a>
+      <small>
+        现在这版已经切成更偏实验感的风格。如果你还想更激进一点，我还能继续往更怪、更潮、更像创意机构官网的方向改。
+      </small>
+      <a class="button button-secondary" href="mailto:hello@example.com">继续改风格</a>
     </footer>
   </div>
 </body>
